@@ -1,13 +1,16 @@
 package Service;
 
 public class Servicer {
-	public Servicer() {}
+	public Servicer() {
+		
+	}
 	
 	public void socketStart() {
-//		while(true)
+		while(true) {
 //		accept()
-		new Thread(new NotifyHandler());
-		
+			new Thread(new NotifyHandler());
+			
+		}		
 	}
 	
 	

@@ -1,9 +1,29 @@
 package Service;
 
-public class NotifyHandler {
-//	while(true)
+public class NotifyHandler extends Thread {
+	
+	public void run() {
+		while(true) {
 //inputScream
-//ins(decode)
-	public void register() {}
+			decode();
+		}		
+	}
+	
+	public void decode() {
+		switch (key) {
+		case value:
+			register();
+			break;
+
+		default:
+			other();
+			break;
+		}
+	}
+	
+	public void register() {
+		
+	}
 	public void other() {}
+		
 }

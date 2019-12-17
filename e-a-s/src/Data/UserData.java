@@ -3,12 +3,14 @@ package Data;
 import java.util.Map;
 
 public class UserData {
-	public User readFile() {}
+	public UserData() {
+//		readData from outside
+	}
+	public Map<Integer, User> search() {}
 	
-	private int Userid() {}
-	private String name(User) {}
-	private int root(User) {}	//enum
-	private String other(User) {}
+	public Map<Integer, User> modify() {
+		
+	}
 	
-	private Map<Userid, User>;
+	private Map<Integer, User> userBase;	//<Userid, User>
 }
