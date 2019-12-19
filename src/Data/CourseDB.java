@@ -2,6 +2,7 @@ package Data;
 
 import java.io.*;
 import java.util.*;
+import java.util.Map.Entry;
 
 import Service.Servicer;
 
@@ -20,7 +21,7 @@ public class CourseDB {
 				readIn(line, br);
 				line = br.readLine();
 			}
-			
+			reader.close();
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
@@ -39,7 +40,6 @@ public class CourseDB {
 			line = br.readLine();
 			Vector<String> student = new Vector<String>();
 			while(line.equals("end-student") != true) {
-//			for(int i=0; i<2; i++) {
 				System.out.println(line);
 				student.add(line);
 				line = br.readLine();
@@ -49,20 +49,51 @@ public class CourseDB {
 			line = br.readLine();
 			ans.setOtherIndo(line);
 			
-			courseBase.put(ans.courseId(), ans);
+			courses.put(ans.courseId(), ans);
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
 		
 	}
 	
-	public synchronized Course searchByCourseId(String id) {
-		for (Map.Entry<String, Course> entry : courseBase.entrySet()) {
-			if(id.equals(entry.getKey())) {
-				return entry.getValue();
+	public void writeBack() {	//unchecked!
+		File file = new File("./course.txt");
+		try {
+			BufferedWriter out = new BufferedWriter(new FileWriter(file));
+			for(Map.Entry<String, Course> entry : courses.entrySet()) {
+				out.write(entry.getKey()+"\n");
+				out.write(entry.getValue().name()+"\n");
+				out.write(entry.getValue().teacherId()+"\n");
+				out.flush();
+				
+				Vector<String> stud = entry.getValue().student();
+				for(int i=0; i<stud.size(); i++) {
+					out.write(stud.get(i)+"\n");
+				}
+				out.write("end-student\n");
+				out.write(entry.getValue().otherInfo()+"\n");
+				out.flush();
+			}
+			out.close();
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+	}	
+	
+	public synchronized Vector<Course> searchByCourseId(String id) {
+		int length = id.length();
+		Vector<Course> ans = new Vector<Course>();
+		if(length <= 3) {
+			return ans;
+		}
+		
+		for (Map.Entry<String, Course> entry : courses.entrySet()) {
+			if(entry.getValue().courseId().substring(0, length).equals(id)) {
+				ans.add(entry.getValue());
 			}
 		}
-		return null;
+
+		return ans;
 //		return new Course();
 		//		id from course
 	}
@@ -71,20 +102,17 @@ public class CourseDB {
 	
 	public synchronized Vector<Course> searchByName(String courseName) {
 		int length = courseName.length();
+		Vector<Course> ans = new Vector<Course>();
 		if(length <= 3) {
-			return null;
+			return ans;
 		}
 		
-		Vector<Course> ans = new Vector<Course>();
-		for (Map.Entry<String, Course> entry : courseBase.entrySet()) {
+		for (Map.Entry<String, Course> entry : courses.entrySet()) {
 			if(entry.getValue().name().substring(0, length).equals(courseName)) {
 				ans.add(entry.getValue());
 			}
 		}
-		if(ans.size() == 0)
-			return null;
-		else
-			return ans;
+		return ans;
 //		fuzzy search
 	}
 	
@@ -93,17 +121,12 @@ public class CourseDB {
 		
 		while(en.hasNext()) {
 			Map.Entry<String, Course> entry1 = en.next();
-			Iterator<Map.Entry<String, Course>> index = courseBase.entrySet().iterator();
+			Iterator<Map.Entry<String, Course>> index = courses.entrySet().iterator();
 			while(index.hasNext()) {
 				Map.Entry<String, Course> entry2 = index.next();
 				
 				if(entry1.getKey() == entry2.getKey()) {
-					if(entry1.getValue().name() == null) {
-						en.remove();
-					}
-					else {
-						courseBase.put(entry1.getKey(), entry1.getValue());
-					}
+					courses.put(entry1.getKey(), entry1.getValue());
 				}
 			}
 			
@@ -115,14 +138,19 @@ public class CourseDB {
 //		Do we need batch operation?
 	}
 	
-	public Map<String, Course> courseBase = new HashMap<String, Course>();	//<CourseId, Course>
-	
-	public static void main(String[] args) {
-		// TODO Auto-generated method stub
-		CourseDB tempCourseDB = new CourseDB();
-		Vector<Course> m = tempCourseDB.searchByName("llll");
-		
-		String n = m.firstElement().name();
-		System.out.println(n);
+	public synchronized void delete(Vector<String> courseId) {
+		for (String course : courseId)
+			courses.remove(course);
 	}
+	
+	private Map<String, Course> courses = new HashMap<String, Course>();	//<CourseId, Course>
+	
+//	public static void main(String[] args) {
+//		// TODO Auto-generated method stub
+//		CourseDB tempCourseDB = new CourseDB();
+//		Vector<Course> m = tempCourseDB.searchByName("llll");
+//		
+//		String n = m.firstElement().name();
+//		System.out.println(n);
+//	}
 }
