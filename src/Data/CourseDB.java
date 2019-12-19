@@ -3,20 +3,22 @@ package Data;
 import java.io.*;
 import java.util.*;
 
+import Service.Servicer;
+
 public class CourseDB {
 	public CourseDB() {
 //		readData from outside
 		try {
 			
-			String pathname = "course.txt";
+			String pathname = "./course.txt";
 			File filename = new File(pathname);
 			InputStreamReader reader = new InputStreamReader(new FileInputStream(filename));
 			BufferedReader br = new BufferedReader(reader);
 			String line = "";
 			line = br.readLine();
 			while (line != null) {
+				readIn(line, br);
 				line = br.readLine();
-				readLine(line);
 			}
 			
 		} catch (Exception e) {
@@ -24,14 +26,39 @@ public class CourseDB {
 		}
 	}
 	
-	public void readLine(String line) {
+	public void readIn(String line, BufferedReader br) {
 //		decode
-//		?
+		try {
+			Course ans = new Course();
+			ans.setCourseId(line);
+			line = br.readLine();
+			ans.setName(line);
+			line = br.readLine();
+			ans.setTeacherId(line);
+			
+			line = br.readLine();
+			Vector<String> student = new Vector<String>();
+			while(line.equals("end-student") != true) {
+//			for(int i=0; i<2; i++) {
+				System.out.println(line);
+				student.add(line);
+				line = br.readLine();
+			}
+			
+			line = br.readLine();
+			line = br.readLine();
+			ans.setOtherIndo(line);
+			
+			courseBase.put(ans.courseId(), ans);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		
 	}
 	
 	public synchronized Course searchByCourseId(String id) {
 		for (Map.Entry<String, Course> entry : courseBase.entrySet()) {
-			if(id == entry.getKey()) {
+			if(id.equals(entry.getKey())) {
 				return entry.getValue();
 			}
 		}
@@ -50,7 +77,7 @@ public class CourseDB {
 		
 		Vector<Course> ans = new Vector<Course>();
 		for (Map.Entry<String, Course> entry : courseBase.entrySet()) {
-			if(entry.getValue().name().substring(0, length) == courseName) {
+			if(entry.getValue().name().substring(0, length).equals(courseName)) {
 				ans.add(entry.getValue());
 			}
 		}
@@ -88,5 +115,14 @@ public class CourseDB {
 //		Do we need batch operation?
 	}
 	
-	private Map<String, Course> courseBase;	//<CourseId, Course>
+	public Map<String, Course> courseBase = new HashMap<String, Course>();	//<CourseId, Course>
+	
+	public static void main(String[] args) {
+		// TODO Auto-generated method stub
+		CourseDB tempCourseDB = new CourseDB();
+		Vector<Course> m = tempCourseDB.searchByName("llll");
+		
+		String n = m.firstElement().name();
+		System.out.println(n);
+	}
 }
