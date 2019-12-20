@@ -1,5 +1,9 @@
 package Data;
 
+import java.io.BufferedReader;
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.InputStreamReader;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Vector;
@@ -7,11 +11,46 @@ import java.util.Vector;
 public class UserDB {
 	private Map<String, User> users;	//<Userid, User>
 
+	// readData from outside
 	public UserDB() {
-		users = new HashMap<String, User>();
-//		readData from outside
+		try {
+			String pathname = "./userDB.txt";
+			File filename = new File(pathname);
+			InputStreamReader reader = new InputStreamReader(new FileInputStream(filename));
+			BufferedReader br = new BufferedReader(reader);
+			String line;
+			line = br.readLine();
+			while (line != null) {
+				readIn(line, br);
+				line = br.readLine();
+			}
+
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
 	}
-	
+
+	public void readIn(String line, BufferedReader br) {
+		try {
+			String id = br.readLine();
+			String name = br.readLine();
+			String []authStrs = br.readLine().split(", ");
+			Vector<Authority> authority = new Vector<Authority>();
+			for (String authStr : authStrs)
+			  authority.add(Authority.valueOf(authStr));
+			String other = br.readLine();
+			Vector<String> courses = new Vector<String>();
+			for (String course : courses)
+			  courses.add(course);
+
+			User newUser = new User(id, name, authority, other, courses);
+			users.put(id, newUser);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+
+	}
+
 	public synchronized Vector<User> search(String id) {
 		Vector<User> result = new Vector<User>();
 		for(Map.Entry<String, User> entry : users.entrySet())
@@ -37,7 +76,7 @@ public class UserDB {
 		int len = inputKey.length();
 		return len >= 3 && userKey.substring(0, len).equals(inputKey);
 	}
-	
+
 	private void print() {
 		for (Map.Entry<String, User> entry : users.entrySet()) {
 			System.out.println(entry.getKey());

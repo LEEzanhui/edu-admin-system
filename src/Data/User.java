@@ -2,7 +2,7 @@ package Data;
 
 import java.util.Vector;
 
-enum Authority{ADMIN, TEACHER, STUDENT};
+enum Authority {ADMIN, TEACHER, STUDENT;}
 
 public class User {
 	private String id="";
