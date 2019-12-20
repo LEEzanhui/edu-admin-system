@@ -7,6 +7,9 @@ import java.util.Map.Entry;
 import Service.Servicer;
 
 public class CourseDB {
+
+	private Map<String, Course> courses = new HashMap<String, Course>();	//<CourseId, Course>
+	
 	public CourseDB() {
 //		readData from outside
 		try {
@@ -116,7 +119,7 @@ public class CourseDB {
 //		fuzzy search
 	}
 
-	public synchronized void modify(Map<String, Course> in) {
+	public synchronized void modify(Map<String, Course> in) throws Exception {	//think about throw exception
 		Iterator<Map.Entry<String, Course>> en = in.entrySet().iterator();
 
 		while(en.hasNext()) {
@@ -138,12 +141,12 @@ public class CourseDB {
 //		Do we need batch operation?
 	}
 
-	public synchronized void delete(Vector<String> courseId) {
+	public synchronized void delete(Vector<String> courseId) throws Exception {	//think about throw exception
 		for (String course : courseId)
-			courses.remove(course);
+			if(courses.remove(course) == null)
+				throw new Exception("courseId: "+course+" not exist!");
 	}
 
-	private Map<String, Course> courses = new HashMap<String, Course>();	//<CourseId, Course>
 
 //	public static void main(String[] args) {
 //		// TODO Auto-generated method stub

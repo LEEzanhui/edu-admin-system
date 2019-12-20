@@ -6,12 +6,20 @@ import java.net.ServerSocket;
 import java.net.Socket;
 import java.util.HashMap;
 import java.util.Map;
+import Data.*;
 
 public class Servicer {
 	private static ServerSocket server;
 	private static int port = 6666;
+	private CourseDB courseDataBase;
+	private UserDB userDataBase;
 	
 	static Map<Integer, Socket> sessionMap = new HashMap<Integer, Socket>();
+	
+	public Servicer() {
+		courseDataBase = new CourseDB();		//maybe be restructure
+		userDataBase = new UserDB();
+	}
 	
 	public void socketStart() {
 		try {
@@ -31,7 +39,7 @@ public class Servicer {
 					ObjectOutputStream oos = new ObjectOutputStream(socket.getOutputStream());
 					oos.writeObject(i);
 					
-					Thread thread = new Thread(new NotifyHandler(socket));
+					Thread thread = new Thread(new NotifyHandler(socket, userDataBase, courseDataBase));
 					thread.setDaemon(true);
 					thread.start();
 					i++;

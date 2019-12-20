@@ -6,14 +6,21 @@ import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.io.OutputStream;
 import java.net.Socket;
+import java.util.Vector;
+
 import User.*;
+import Data.*;
 
 public class NotifyHandler extends Thread {
-	Socket socket = null;
-	InputStream in = null;
+	private Socket socket = null;
+	private InputStream in = null;
+	private CourseDB courseDataBase;
+	private UserDB userDataBase;
 	
-	public NotifyHandler(Socket socket) {
+	public NotifyHandler(Socket socket, UserDB userDataBase, CourseDB courseDataBase) {
 		this.socket = socket;
+		this.userDataBase = userDataBase;
+		this.courseDataBase = courseDataBase;
 	}
 	
 	public void run() {
@@ -48,22 +55,59 @@ public class NotifyHandler extends Thread {
 	}
 	
 	public Instruction decode(Instruction ins) {
-		switch (1) {
+		Instruction newIns = new Instruction();
+		
+		switch (ins.getOpcode()) {		//decide opcode
 		case 1:
-			register();
+			newIns = register(ins);
 			break;
-
+		case 2:
+			newIns = searchCourseById(ins);
+			break;
+		case 3:
+			newIns = searchCourseByName(ins);
+			break;
+		case 4:
+			newIns = searchUserById(ins);
+			break;
+		case 5:
+			newIns = searchUserByName(ins);
+			break;
+		case 6:
+			newIns = modifyCourse(ins);
+			break;
+		case 7:
+			newIns = modifyId(ins);
+			break;
 		default:
 			other();
 			break;
 		}
 		
-		return new Instruction();
+		return ins;
 	}
 	
-	public void register() {
+	public Instruction register(Instruction ins) {
+		
+		
+		return ins;
+	}
+	public Instruction searchCourseById(Instruction ins) {
+		Vector<Course> course = courseDataBase.searchByCourseId(ins.getInfo().get(0));
+		Instruction newIns = new Instruction();
+		newIns.setCourses(course);
+		return newIns;
+	}
+	public Instruction searchCourseByName(Instruction ins) {
+		Vector<Course> course = courseDataBase.searchByName(ins.getInfo().get(0));
+		Instruction newIns = new Instruction();
+		newIns.setCourses(course);
+		return newIns;
+	}
+	public Instruction modifyCourse(Instruction ins) {
 		
 	}
-	public void other() {}
+	
+	public Instruction other() {}
 		
 }
