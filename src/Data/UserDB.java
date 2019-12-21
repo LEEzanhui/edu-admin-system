@@ -1,10 +1,11 @@
 package Data;
 
 import java.io.BufferedReader;
+import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileInputStream;
+import java.io.FileWriter;
 import java.io.InputStreamReader;
-import java.util.HashMap;
 import java.util.Map;
 import java.util.Vector;
 
@@ -34,21 +35,54 @@ public class UserDB {
 		try {
 			String id = br.readLine();
 			String name = br.readLine();
+
+			// Vector<Authority> authority = fileInputVector(br);
 			String []authStrs = br.readLine().split(", ");
 			Vector<Authority> authority = new Vector<Authority>();
 			for (String authStr : authStrs)
 			  authority.add(Authority.valueOf(authStr));
+
 			String other = br.readLine();
+
+			String []coursesStr = br.readLine().split(", ");
 			Vector<String> courses = new Vector<String>();
-			for (String course : courses)
-			  courses.add(course);
+			for (String courseStr : coursesStr)
+			  courses.add(courseStr);
 
 			User newUser = new User(id, name, authority, other, courses);
 			users.put(id, newUser);
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
+	}
 
+	public void writeBack() {	//unchecked!
+		File file = new File("./user.txt");
+		try {
+			BufferedWriter out = new BufferedWriter(new FileWriter(file));
+			for(Map.Entry<String, User> entry : users.entrySet()) {
+				out.write(entry.getKey()+"\n");
+				out.write(entry.getValue().id()+"\n");
+				out.write(entry.getValue().name()+"\n");
+
+				Vector<Authority> authority = entry.getValue().authority();
+				for (int i=0; i<authority.size(); i++)
+					if (i == 0) out.write(authority.get(i).toString());
+					else out.write(", "+authority.get(i).toString());
+				out.write("\n");
+
+				out.write(entry.getValue().other()+"\n");
+
+				Vector<String> courses = entry.getValue().courses();
+				for (int i=0; i<courses.size(); i++)
+				  if (i == 0) out.write(courses.get(i).toString());
+				  else out.write(", "+courses.get(i).toString());
+				out.flush();
+			}
+			out.close();
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
 	}
 
 	public synchronized Vector<User> search(String id) {
@@ -77,18 +111,26 @@ public class UserDB {
 		return len >= 3 && userKey.substring(0, len).equals(inputKey);
 	}
 
-	private void print() {
-		for (Map.Entry<String, User> entry : users.entrySet()) {
-			System.out.println(entry.getKey());
-			System.out.println(entry.getValue().name());
-			System.out.println(entry.getValue().authority());
-			System.out.println(entry.getValue().other());
-			System.out.println(entry.getValue().courses());
-		}
-	}
+	// public void print() {
+	// 	for (Map.Entry<String, User> entry : users.entrySet()) {
+	// 		System.out.println(entry.getKey());
+	// 		System.out.println(entry.getValue().name());
+	// 		System.out.println(entry.getValue().authority());
+	// 		System.out.println(entry.getValue().other());
+	// 		System.out.println(entry.getValue().courses());
+	// 	}
+	// }
 
+	// private <Type> Vector<Type> fileInputVector(BufferedReader br) throws IOException {
+	// 	String []strs = br.readLine().split(", ");
+	// 	Vector<Type> vec = new Vector<Type>();
+	// 	for (String str : strs)
+	// 	  vec.add((Type)str);
+	// 	return vec;
+	// }
 
 	public static void main(String[] args) {
+		/*
 		UserDB userDB = new UserDB();
 //		userDB.users.put("1234", new User());
 		Map<String, User> newUsers = new HashMap<String, User>();
@@ -102,5 +144,6 @@ public class UserDB {
 		delUsers.add("1234");
 		userDB.delete(delUsers);
 		System.out.println("----\n"+userDB.search("123"));
+		*/
 	}
 }

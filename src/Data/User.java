@@ -45,8 +45,13 @@ public class User {
 	}
 
 	public static void main(String[] args) {
-		User user = new User();
-		User newUser = new User("123", "asd", new Vector<Authority>(), "asd");
-		System.out.println(newUser.courses == null);
+		/* case 1 */
+		// User user = new User();
+		// User newUser = new User("123", "asd", new Vector<Authority>(), "asd");
+		// System.out.println(newUser.courses == null);
+		
+		// Test
+//		String str = "ADMIN";
+//		System.out.println((Authority)str);
 	}
 }
