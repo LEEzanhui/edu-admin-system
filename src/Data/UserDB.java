@@ -112,7 +112,7 @@ public class UserDB {
 
 	private boolean isMatched(String userKey, String inputKey) {
 		int len = inputKey.length();
-		return len >= 3 && userKey.substring(0, len-1).equals(inputKey);
+		return len >= 3 && userKey.substring(0, len).equals(inputKey);
 	}
 	
 //	public void print() {
