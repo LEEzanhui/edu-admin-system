@@ -116,6 +116,7 @@ public class UserDB {
 	}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 //	public void print() {
 //		for (Map.Entry<String, User> entry : users.entrySet()) {
 //			System.out.println(entry.getKey());
@@ -146,6 +147,8 @@ public class UserDB {
 //		userDB.writeBack();
 //	}
 =======
+=======
+>>>>>>> 8b162b0646f3f9d98d7d65f1d9234a1bb8221b21
 	public void print() {
 		for (Map.Entry<String, User> entry : users.entrySet()) {
 			System.out.println(entry.getKey());
