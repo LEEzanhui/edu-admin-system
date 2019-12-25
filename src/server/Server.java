@@ -1,4 +1,4 @@
-package Service;
+package server;
 
 import java.io.IOException;
 import java.io.ObjectOutputStream;
@@ -9,7 +9,7 @@ import java.util.Map;
 
 import data.*;
 
-public class Servicer {
+public class Server {
 	private static ServerSocket server;
 	private static int port = 6666;
 	private CourseDB courseDataBase;
@@ -17,7 +17,7 @@ public class Servicer {
 	
 	static Map<Integer, Socket> sessionMap = new HashMap<Integer, Socket>();
 	
-	public Servicer() {
+	public Server() {
 		courseDataBase = new CourseDB();		//maybe be restructure
 		userDataBase = new UserDB();
 	}
@@ -33,8 +33,8 @@ public class Servicer {
 			
 			while (true) {
 				Socket socket = server.accept();
-				System.out.println("Connect to client!");
 				if(socket != null) {
+					System.out.println("Connect to client!");
 					sessionMap.put(i, socket);
 					
 					ObjectOutputStream oos = new ObjectOutputStream(socket.getOutputStream());
@@ -54,7 +54,7 @@ public class Servicer {
 	
 	
 	public static void main(String[] args) {
-		new Servicer().socketStart();
+		new Server().socketStart();
 	}
 
 }

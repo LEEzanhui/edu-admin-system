@@ -10,6 +10,8 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.Vector;
 
+import data.users.Authority;
+
 public class UserDB {
 	private static Map<String, User> users;	// <Userid, User>
 	private static String pathname = "data/userDB.txt";
@@ -33,7 +35,7 @@ public class UserDB {
 		}
 	}
 
-	public void importUser(String id, BufferedReader br) {
+	private void importUser(String id, BufferedReader br) {
 		try {
 			String name = br.readLine();
 
@@ -55,7 +57,7 @@ public class UserDB {
 				  courses.add(courseStr);
 			}
 
-			User newUser = new User(id, name, authority, other, courses);
+			User newUser = new User(id, name, other, courses);
 			users.put(id, newUser);
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -91,10 +93,18 @@ public class UserDB {
 		}
 	}
 
-	public synchronized Vector<User> search(String id) {
+	public synchronized Vector<User> searchById(String id) {
 		Vector<User> result = new Vector<User>();
 		for(Map.Entry<String, User> entry : users.entrySet())
 		  if (isMatched(entry.getKey(), id))
+			result.add(entry.getValue());
+		return result;
+	}
+
+	public synchronized Vector<User> searchByName(String name) {
+		Vector<User> result = new Vector<User>();
+		for(Map.Entry<String, User> entry : users.entrySet())
+		  if (isMatched(entry.getKey(), name))
 			result.add(entry.getValue());
 		return result;
 	}
@@ -114,7 +124,7 @@ public class UserDB {
 		int len = inputKey.length();
 		return len >= 3 && userKey.substring(0, len).equals(inputKey);
 	}
-	
+
 //	public void print() {
 //		for (Map.Entry<String, User> entry : users.entrySet()) {
 //			System.out.println(entry.getKey());

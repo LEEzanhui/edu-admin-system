@@ -2,28 +2,26 @@ package data;
 
 import java.util.Vector;
 
-enum Authority {ADMIN, TEACHER, STUDENT;}
+import data.users.Authority;
 
 public class User {
-	private String id="";
-	private String name="";
-	private Vector<Authority> authority = new Vector<Authority>();
-	private String other="";
-	private Vector<String> courses = new Vector<String>(); // store courses' id
+	protected String id="";
+	protected String name="";
+	protected Vector<Authority> authority = new Vector<Authority>();
+	protected String other="";
+	protected Vector<String> courses = new Vector<String>(); // store courses' id
 
 	public User() {}
-	public User(String id, String name, Vector<Authority> authority, String other) {
+	public User(String id, String name, String other) {
 		this.id = id;
 		this.name = name;
-		this.authority = authority;
 		this.other = other;
 	}
-	public User(String id, String name, Vector<Authority> authority,
+	public User(String id, String name,
 				String other, Vector<String> courses) {
 
 		this.id = id;
 		this.name = name;
-		this.authority = authority;
 		this.other = other;
 		this.courses = courses;
 	}
@@ -49,7 +47,7 @@ public class User {
 		// User user = new User();
 		// User newUser = new User("123", "asd", new Vector<Authority>(), "asd");
 		// System.out.println(newUser.courses == null);
-		
+
 		// Test
 //		String str = "ADMIN";
 //		System.out.println((Authority)str);

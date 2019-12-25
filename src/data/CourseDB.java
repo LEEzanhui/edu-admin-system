@@ -4,14 +4,14 @@ import java.io.*;
 import java.util.*;
 import java.util.Map.Entry;
 
-import Service.Servicer;
+import server.Server;
 
 public class CourseDB {
 
 	private Map<String, Course> courses = new HashMap<String, Course>();	//<CourseId, Course>
-	
-	public CourseDB() {		//think about exception
-//		readData from outside
+
+	// readData from outside
+	public CourseDB() {
 		try {
 
 			String pathname = "./course.txt";
@@ -74,7 +74,7 @@ public class CourseDB {
 					out.write(stud.get(i)+"\n");
 				}
 				out.write("end-student\n");
-				out.write(entry.getValue().otherInfo()+"\n");
+				out.write(entry.getValue().other()+"\n");
 				out.flush();
 			}
 			out.close();
@@ -121,7 +121,7 @@ public class CourseDB {
 
 	public synchronized void modify(Map<String, Course> in) throws Exception {	//think about throw exception(unchecked)
 		Iterator<Map.Entry<String, Course>> en = in.entrySet().iterator();
-		
+
 		while(en.hasNext()) {
 			Map.Entry<String, Course> entry1 = en.next();
 			Iterator<Map.Entry<String, Course>> index = courses.entrySet().iterator();
@@ -134,7 +134,7 @@ public class CourseDB {
 					courses.put(entry1.getKey(), entry1.getValue());
 				}
 			}
-			
+
 			if(flag == false)
 				throw new Exception("courseId: "+entry1.getKey()+" not exist!");
 		}

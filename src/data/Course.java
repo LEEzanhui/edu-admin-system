@@ -9,16 +9,16 @@ public class Course {
 	private String name;
 	private String teacherId;
 	private Vector<String> student;	//<studentId>
-	private String otherInfo;
-	
+	private String other;
+
 	public Course() {
 		id = null;
 		name = null;
 		teacherId = null;
 		student = null;
-		otherInfo = null;
+		other = null;
 	}
-	
+
 	public String courseId() {
 		return id;
 	}
@@ -43,11 +43,11 @@ public class Course {
 	public void setStudent(Vector<String> in) {
 		this.student = in;
 	}
-	public String otherInfo() {
-		return otherInfo;
+	public String other() {
+		return other;
 	}
 	public void setOtherIndo(String info) {
-		this.otherInfo = info;
+		this.other = info;
 	}
-	
+
 }
