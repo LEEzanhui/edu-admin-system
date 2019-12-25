@@ -31,7 +31,11 @@ public class UIConst {
 	public final static ImageIcon ICON_DATA_SYNC = null;
 	
 //	工具栏图标
+//	默认
 	public final static ImageIcon ICON_XXX = null;
+//	激活
+	public final static ImageIcon ICON_XXX_ENABLE = null;
+	
 	
     // 样式布局相关
     /**

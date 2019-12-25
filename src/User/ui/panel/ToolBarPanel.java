@@ -2,8 +2,11 @@ package User.ui.panel;
 
 import javax.swing.*;
 import java.awt.*;
+
+import User.App;
 import User.ui.IconButton;
 import User.ui.UIConst;
+import javafx.scene.layout.Border;
 
 public class ToolBarPanel extends JPanel {
 	
@@ -27,6 +30,38 @@ public class ToolBarPanel extends JPanel {
 	}
 	
 	public void addButton() {
-		JPanel panelUp = 
+		JPanel panelU = new JPanel();	//工具栏上端
+		panelU.setBackground(UIConst.TOOL_BAR_BACK_COLOR);
+		panelU.setLayout(new FlowLayout(-2, -2, 4));
+		JPanel panelD = new JPanel();	//工具栏下端
+		panelD.setBackground(UIConst.TOOL_BAR_BACK_COLOR);
+		panelD.setLayout(new BorderLayout(0, 0));
+		
+		buttonSM = null;
+		buttonTimetable = null;
+		buttonSetting = null;
+		
+		panelU.add(buttonSM);
+		panelU.add(buttonTimetable);
+		panelD.add(buttonSetting, BorderLayout.SOUTH);
+		
+		this.add(panelU);
+		this.add(panelD);
+	}
+	
+	public void addListener() {
+		buttonSM.addActionListener(e -> {
+			buttonSM.setIcon(UIConst.ICON_XXX_ENABLE);	//be chose
+			buttonTimetable.setIcon(UIConst.ICON_XXX);	//other not chose
+//			buttonSetting.setIcon(UIConst.ICON_set);
+			
+			App.mainPanel.removeAll();
+			SMPanel.setContent();
+			App.mainPanel.add(App.smPanel, BorderLayout.CENTER);
+			
+			App.mainPanel.updateUI();
+		});
+		
+//		...
 	}
 }
