@@ -6,10 +6,13 @@ import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.io.OutputStream;
 import java.net.Socket;
+import java.util.HashMap;
+import java.util.Map;
 import java.util.Vector;
 
 import User.*;
 import data.*;
+import jdk.nashorn.internal.ir.BreakableNode;
 
 public class NotifyHandler extends Thread {
 	private Socket socket = null;
@@ -68,16 +71,22 @@ public class NotifyHandler extends Thread {
 			newIns = searchCourseByName(ins);
 			break;
 		case 4:
-			newIns = searchUserById(ins);
-			break;
-		case 5:
-			newIns = searchUserByName(ins);
-			break;
-		case 6:
 			newIns = modifyCourse(ins);
 			break;
+		case 5:
+			newIns = deleteCourse(ins);
+			break;
+		case 6:
+			newIns = searchUserById(ins);
+			break;
 		case 7:
+			newIns = searchUserByName(ins);
+			break;
+		case 8:
 			newIns = modifyId(ins);
+			break;
+		case 9:
+			newIns = deleteUser(ins);
 			break;
 		default:
 			other();
@@ -93,21 +102,53 @@ public class NotifyHandler extends Thread {
 		return ins;
 	}
 	public Instruction searchCourseById(Instruction ins) {
-		Vector<Course> course = courseDataBase.searchByCourseId(ins.getInfo().get(0));
 		Instruction newIns = new Instruction();
+		newIns.setId(ins.getId());
+
+		Vector<Course> course = courseDataBase.searchByCourseId(ins.getInfo().get(0));
 		newIns.setCourses(course);
 		return newIns;
 	}
 	public Instruction searchCourseByName(Instruction ins) {
-		Vector<Course> course = courseDataBase.searchByName(ins.getInfo().get(0));
 		Instruction newIns = new Instruction();
+		newIns.setId(ins.getId());
+
+		Vector<Course> course = courseDataBase.searchByName(ins.getInfo().get(0));
 		newIns.setCourses(course);
 		return newIns;
 	}
 	public Instruction modifyCourse(Instruction ins) {
+		Instruction newIns = new Instruction();
+		newIns.setId(ins.getId());
+		Vector<String> out = new Vector<String>();
 		
+		try {
+			Map<String, Course> revision = new HashMap<String, Course>();
+			for(Course temp : ins.getCourses()) {
+				revision.put(temp.courseId(), temp);
+			}
+			courseDataBase.modify(revision);
+		} catch (Exception e) {
+			e.getMessage();
+			out.add(e.getMessage());
+		}
+		newIns.setInfo(out);
+		return newIns;
 	}
-	
+	public Instruction deleteCourse(Instruction ins) {
+		Instruction newIns = new Instruction();
+		newIns.setId(ins.getId());
+		Vector<String> out = new Vector<String>();
+		
+		try {
+			courseDataBase.delete(ins.getInfo());
+		} catch (Exception e) {
+			e.getMessage();
+			out.add(e.getMessage());
+		}
+		newIns.setInfo(out);
+		return newIns;
+	}
 	public Instruction other() {}
 		
 }
