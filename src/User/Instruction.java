@@ -3,7 +3,8 @@ package User;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Vector;
-import Data.*;
+
+import data.*;
 
 public class Instruction {
 	int opcode;

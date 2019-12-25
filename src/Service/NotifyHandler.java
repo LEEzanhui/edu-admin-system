@@ -9,7 +9,7 @@ import java.net.Socket;
 import java.util.Vector;
 
 import User.*;
-import Data.*;
+import data.*;
 
 public class NotifyHandler extends Thread {
 	private Socket socket = null;

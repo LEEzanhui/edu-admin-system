@@ -44,7 +44,7 @@ public class User {
 		return courses;
 	}
 
-	public static void main(String[] args) {
+//	public static void main(String[] args) {
 		/* case 1 */
 		// User user = new User();
 		// User newUser = new User("123", "asd", new Vector<Authority>(), "asd");
@@ -53,5 +53,5 @@ public class User {
 		// Test
 //		String str = "ADMIN";
 //		System.out.println((Authority)str);
-	}
+//	}
 }
