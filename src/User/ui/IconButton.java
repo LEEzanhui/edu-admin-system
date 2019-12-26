@@ -5,7 +5,7 @@ import javax.swing.ImageIcon;
 import javax.swing.JButton;
 
 public class IconButton extends JButton{
-	private static final long serialVersionUID = 1L;//???
+//	private static final long serialVersionUID = 1L;//???
 	private ImageIcon iconEnable, iconDisable;
 	private String tip;
 	

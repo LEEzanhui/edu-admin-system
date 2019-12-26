@@ -32,10 +32,13 @@ public class UIConst {
 	
 //	工具栏图标
 //	默认
-	public final static ImageIcon ICON_XXX = null;
+	public static ImageIcon ICON_XXX = null;
 //	激活
 	public final static ImageIcon ICON_XXX_ENABLE = null;
 	
+	public static void initial() {
+		ICON_XXX = new ImageIcon("src//User//ui//image//setting.png");
+	}
 	
     // 样式布局相关
     /**

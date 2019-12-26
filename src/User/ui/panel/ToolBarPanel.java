@@ -6,7 +6,6 @@ import java.awt.*;
 import User.App;
 import User.ui.IconButton;
 import User.ui.UIConst;
-import javafx.scene.layout.Border;
 
 public class ToolBarPanel extends JPanel {
 	
@@ -37,13 +36,13 @@ public class ToolBarPanel extends JPanel {
 		panelD.setBackground(UIConst.TOOL_BAR_BACK_COLOR);
 		panelD.setLayout(new BorderLayout(0, 0));
 		
-		buttonSM = null;
+		buttonSM = new IconButton(UIConst.ICON_XXX, UIConst.ICON_XXX, UIConst.ICON_XXX, "tip");
 		buttonTimetable = null;
-		buttonSetting = null;
+//		buttonSetting = null;
 		
 		panelU.add(buttonSM);
-		panelU.add(buttonTimetable);
-		panelD.add(buttonSetting, BorderLayout.SOUTH);
+//		panelU.add(buttonTimetable);
+//		panelD.add(buttonSetting, BorderLayout.SOUTH);
 		
 		this.add(panelU);
 		this.add(panelD);
@@ -51,15 +50,15 @@ public class ToolBarPanel extends JPanel {
 	
 	public void addListener() {
 		buttonSM.addActionListener(e -> {
-			buttonSM.setIcon(UIConst.ICON_XXX_ENABLE);	//be chose
-			buttonTimetable.setIcon(UIConst.ICON_XXX);	//other not chose
+//			buttonSM.setIcon(UIConst.ICON_XXX_ENABLE);	//be chose
+//			buttonTimetable.setIcon(UIConst.ICON_XXX);	//other not chose
 //			buttonSetting.setIcon(UIConst.ICON_set);
 			
-			App.mainPanel.removeAll();
+			App.mainPanelpart.removeAll();
 			SMPanel.setContent();
-			App.mainPanel.add(App.smPanel, BorderLayout.CENTER);
+			App.mainPanelpart.add(App.smPanel, BorderLayout.CENTER);
 			
-			App.mainPanel.updateUI();
+			App.mainPanelpart.updateUI();
 		});
 		
 //		...
