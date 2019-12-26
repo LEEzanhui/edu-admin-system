@@ -15,6 +15,7 @@ public class App {
 
 	public static JPanel mainPanelpart;
 	public static SMPanel smPanel;
+	public static LoginPanel loginPanel;
 	public static ToolBarPanel toolBarPanel;
 //	public static LoginPanel loginPanel;
 //	...
@@ -41,13 +42,14 @@ public class App {
 		frame = new JFrame();
 		frame.setBounds(UIConst.MAIN_WINDOW_X, UIConst.MAIN_WINDOW_Y, UIConst.MAIN_WINDOW_WIDTH,
                 UIConst.MAIN_WINDOW_HEIGHT);
-//        frame.setTitle(UIConst.APP_NAME);
+        frame.setTitle(UIConst.APP_NAME);
 //        frame.setIconImage(UIConst.IMAGE_ICON);
         frame.setBackground(UIConst.MAIN_BACK_COLOR);
         
         JPanel mainPanel = new JPanel(true);
         
         smPanel = new SMPanel();
+        loginPanel = new LoginPanel();
         
 		mainPanelpart = new JPanel(true);
 		mainPanelpart.setLayout(new BorderLayout());

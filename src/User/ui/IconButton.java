@@ -1,5 +1,6 @@
 package User.ui;
 
+import java.awt.Image;
 import java.awt.Insets;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
@@ -12,8 +13,8 @@ public class IconButton extends JButton{
 //	默认图标、激活图标、失效图标
 	public IconButton(ImageIcon iconNormal, ImageIcon iconEnable, ImageIcon iconDisable, String tip) {
 		super(iconNormal);
-		
 		this.iconEnable = iconEnable;
+		this.iconEnable.setImage(iconEnable.getImage().getScaledInstance(48, 48, Image.SCALE_DEFAULT));;
 		this.iconDisable = iconDisable;
 		this.tip = tip;
 		

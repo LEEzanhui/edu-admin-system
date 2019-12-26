@@ -36,13 +36,13 @@ public class ToolBarPanel extends JPanel {
 		panelD.setBackground(UIConst.TOOL_BAR_BACK_COLOR);
 		panelD.setLayout(new BorderLayout(0, 0));
 		
-		buttonSM = new IconButton(UIConst.ICON_XXX, UIConst.ICON_XXX, UIConst.ICON_XXX, "tip");
-		buttonTimetable = null;
+		buttonSM = new IconButton(UIConst.ICON_XXX, UIConst.ICON_XXX_ENABLE, UIConst.ICON_XXX_DISABLE, "tip");
+		buttonTimetable = new IconButton(UIConst.ICON_XXX_ENABLE, UIConst.ICON_XXX_DISABLE, UIConst.ICON_XXX, "???");
 //		buttonSetting = null;
 		
 		panelU.add(buttonSM);
 //		panelU.add(buttonTimetable);
-//		panelD.add(buttonSetting, BorderLayout.SOUTH);
+		panelD.add(buttonTimetable, BorderLayout.SOUTH);
 		
 		this.add(panelU);
 		this.add(panelD);
@@ -55,7 +55,14 @@ public class ToolBarPanel extends JPanel {
 //			buttonSetting.setIcon(UIConst.ICON_set);
 			
 			App.mainPanelpart.removeAll();
-			SMPanel.setContent();
+//			SMPanel.setContent();
+			App.mainPanelpart.add(App.loginPanel, BorderLayout.CENTER);
+			
+			App.mainPanelpart.updateUI();
+		});
+		
+		buttonTimetable.addActionListener(e -> {
+			App.mainPanelpart.removeAll();
 			App.mainPanelpart.add(App.smPanel, BorderLayout.CENTER);
 			
 			App.mainPanelpart.updateUI();

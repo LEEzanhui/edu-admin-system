@@ -6,13 +6,12 @@ import javax.swing.*;
 import User.ui.UIConst;
 
 public class SMPanel extends JPanel {
-
+	private JTextField textField;
 	private JButton buttonOn;
 //	private static tex
 	
 	public SMPanel() {
 		initial();
-		addButton();
 	}
 	
 	public void initial() {
@@ -20,17 +19,26 @@ public class SMPanel extends JPanel {
         this.setPreferredSize(preferredSize);
         this.setMaximumSize(preferredSize);
         this.setMinimumSize(preferredSize);
-        this.setBackground(UIConst.MAIN_BACK_COLOR);
-        this.setLayout(new GridLayout(2, 1));
+
+        this.setLayout(new GridLayout(1, 1));        
         
-	}
-	
-	public void addButton() {
-		JPanel p = new JPanel();
-		p.setLayout(new BorderLayout());
+		JPanel panel = new JPanel();
+		
+		GridBagLayout gridbag = new GridBagLayout();
+		panel.setLayout(gridbag);
+		panel.setBackground(UIConst.MAIN_BACK_COLOR);
+		GridBagConstraints c = new GridBagConstraints();
+		
+		c.gridheight = 1;
+		c.gridwidth = 1;
+		textField = new JTextField(13);
 		buttonOn = new JButton("-_-");
-		p.add(buttonOn);
-		this.add(p, BorderLayout.CENTER);
+		gridbag.setConstraints(textField, c);
+		panel.add(textField);
+		gridbag.setConstraints(buttonOn, c);
+		panel.add(buttonOn);
+
+		this.add(panel, BorderLayout.CENTER);
 	}
 	
 	public static void setContent() {
