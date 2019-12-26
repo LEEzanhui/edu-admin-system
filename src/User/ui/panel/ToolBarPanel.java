@@ -56,14 +56,14 @@ public class ToolBarPanel extends JPanel {
 			
 			App.mainPanelpart.removeAll();
 //			SMPanel.setContent();
-			App.mainPanelpart.add(App.loginPanel, BorderLayout.CENTER);
+//			App.mainPanelpart.add(App.loginPanel, BorderLayout.CENTER);
 			
 			App.mainPanelpart.updateUI();
 		});
 		
 		buttonTimetable.addActionListener(e -> {
 			App.mainPanelpart.removeAll();
-			App.mainPanelpart.add(App.smPanel, BorderLayout.CENTER);
+//			App.mainPanelpart.add(App.smPanel, BorderLayout.CENTER);
 			
 			App.mainPanelpart.updateUI();
 		});

@@ -7,13 +7,18 @@ import java.awt.*;
 //import java.io.File;
 
 public class UIConst {
-//	app name
-	public final static String APP_NAME = "Yunkai";
-//	主窗口大小
-	public final static int MAIN_WINDOW_X = 240;
-	public final static int MAIN_WINDOW_Y = 100;
+	
+	public final static String APP_NAME = "Educational Administration System";
+	
+	public final static int MAIN_WINDOW_X = 100;
+	public final static int MAIN_WINDOW_Y = 40;
+	
 	public final static int MAIN_WINDOW_WIDTH = 885;
 	public final static int MAIN_WINDOW_HEIGHT = 636;
+	public final static int MAIN_WINDOW_MAX_WIDTH = 1920;
+	public final static int MAIN_WINDOW_MAX_HEIGHT = 1080;
+	public final static int MAIN_WINDOW_MIN_WIDTH = 400;
+	public final static int MAIN_WINDOW_MIN_HEIGHT = 300;
 	
 //	主窗口图标
 	public final static String filepath = "";
@@ -30,19 +35,13 @@ public class UIConst {
 	
 	public final static ImageIcon ICON_DATA_SYNC = null;
 	
-//	工具栏图标
-//	默认
-	public static ImageIcon ICON_XXX = null;
-//	激活
-	public static ImageIcon ICON_XXX_ENABLE = null;
-	
-	public static ImageIcon ICON_XXX_DISABLE = null;
-	
-	public static void initial() {
-		ICON_XXX = new ImageIcon("src//User//ui//image//setting.png");
-		ICON_XXX_ENABLE = new ImageIcon("src//User//ui//image//atom.png");
-		ICON_XXX_DISABLE = new ImageIcon("src//User//ui//image//angel.png");
-	}
+//	ToolBarIcon
+//	default
+	public final static ImageIcon ICON_XXX = new ImageIcon("resource//icon//setting.png");
+//	enable
+	public final static ImageIcon ICON_XXX_ENABLE = new ImageIcon("resource//icon//atom.png");
+//	disable
+	public final static ImageIcon ICON_XXX_DISABLE = new ImageIcon("resource//icon//angel.png");
 	
     // 样式布局相关
     /**
