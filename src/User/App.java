@@ -1,10 +1,15 @@
 package User;
 
 import java.awt.*;
+import java.io.*;
+import java.net.InetAddress;
+import java.net.Socket;
+
 import javax.swing.*;
 
 import User.ui.*;
 import User.ui.panel.*;
+import server.Message;
 
 public class App {
 
@@ -14,7 +19,12 @@ public class App {
 	public static SMPanel smPanel;
 	public static LoginPanel loginPanel;
 	public static ToolBarPanel toolBarPanel;
-//	...
+	
+	private Socket socket = null;
+	private InputStreamReader input = null;
+	private InputStream in = null;
+	private OutputStream out = null;
+	private int clientId;
 
 	public static void main(String[] args) {
 		EventQueue.invokeLater(() -> {
@@ -32,6 +42,71 @@ public class App {
 //		loginPanel.buttonStartSchedule.doClick();
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
+        socketStart();
+	}
+	
+	public void socketStart() {
+		try {
+			InetAddress host = InetAddress.getLocalHost();
+			socket = new Socket(host.getHostName(), 6666);
+			
+			in = socket.getInputStream();
+			ObjectInputStream ois = new ObjectInputStream(in);
+			clientId = (int)ois.readObject();
+			
+			System.out.println("clientId" + clientId);
+			
+			new Thread() {
+				public void run() {
+					try {
+						while(true) {
+							in = socket.getInputStream();
+							ObjectInputStream ois = new ObjectInputStream(in);
+							Message<?> msg = (Message<?>)ois.readObject();
+							System.out.println("Receive: " + msg.getOpcode());
+							
+//							guess
+							handleInput(msg);
+						}
+					}
+					catch (Exception e) {
+						e.printStackTrace();e.printStackTrace();
+					}
+				}
+			}.start();
+			
+			out = socket.getOutputStream();
+			ObjectOutputStream oos = new ObjectOutputStream(out);
+			while(true) {
+//				input = new InputStreamReader(System.in);
+//				String msg = new BufferedReader(input).readLine();
+//				Message message = new Message();
+				
+				oos.writeObject(message);									
+			}
+		}
+		catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			try {
+				in.close();
+				out.close();
+				socket.close();
+			} catch (Exception e2) {
+				e2.printStackTrace();
+			}
+		}
+	}
+	
+	public void handleInput(Message<?> msg) {
+		switch (msg.getOpcode()) {
+		case 1:
+			
+			break;
+
+		default:
+			break;
+		}
 	}
 
 	public void initial() {
@@ -61,6 +136,5 @@ public class App {
 		mainPanel.add(mainPanelpart, BorderLayout.CENTER);
 
 		frame.add(mainPanel);
-
 	}
 }
