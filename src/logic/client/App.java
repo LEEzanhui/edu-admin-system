@@ -1,4 +1,4 @@
-package User;
+package logic.client;
 
 import java.awt.*;
 import java.io.*;
@@ -9,7 +9,11 @@ import javax.swing.*;
 
 import User.ui.*;
 import User.ui.panel.*;
-import server.Message;
+import gui.UIConst;
+import gui.panel.LoginPanel;
+import gui.panel.SMPanel;
+import gui.panel.ToolBarPanel;
+import logic.server.Message;
 
 public class App {
 

@@ -1,4 +1,4 @@
-package server;
+package logic.server;
 
 import java.io.IOException;
 import java.io.InputStream;

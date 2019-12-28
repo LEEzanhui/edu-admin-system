@@ -1,4 +1,4 @@
-package User.ui;
+package gui;
 
 //import javax.imageio.ImageIO;
 //import com.sun.prism.Image;

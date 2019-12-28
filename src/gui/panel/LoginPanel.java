@@ -1,8 +1,8 @@
-package User.ui.panel;
+package gui.panel;
 
 import javax.swing.*;
 
-import User.ui.UIConst;
+import gui.UIConst;
 
 import java.awt.*;
 

@@ -1,11 +1,11 @@
-package User.ui.panel;
+package gui.panel;
 
 import javax.swing.*;
 import java.awt.*;
 
-import User.App;
-import User.ui.IconButton;
-import User.ui.UIConst;
+import gui.IconButton;
+import gui.UIConst;
+import logic.client.App;
 
 public class ToolBarPanel extends JPanel {
 	

@@ -1,9 +1,9 @@
-package User.ui.panel;
+package gui.panel;
 
 import java.awt.*;
 import javax.swing.*;
 
-import User.ui.UIConst;
+import gui.UIConst;
 
 public class SMPanel extends JPanel {
 	private JTextField textField;

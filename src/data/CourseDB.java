@@ -4,7 +4,7 @@ import java.io.*;
 import java.util.*;
 import java.util.Map.Entry;
 
-import server.Server;
+import logic.server.Server;
 
 public class CourseDB {
 
