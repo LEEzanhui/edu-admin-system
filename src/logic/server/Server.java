@@ -8,10 +8,10 @@ import java.util.HashMap;
 import java.util.Map;
 
 import data.*;
+import logic.Configuration;
 
 public class Server {
 	private static ServerSocket server;
-	private static int port = 6666;
 	private CourseDB courseDataBase;
 	private UserDB userDataBase;
 	
@@ -24,7 +24,7 @@ public class Server {
 	
 	public void socketStart() {
 		try {
-			server = new ServerSocket(port);
+			server = new ServerSocket(Configuration.port);
 			System.out.println("Server->java Server");
 			System.out.println("Initializing Port...");
 			System.out.println("Listening");

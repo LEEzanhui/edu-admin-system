@@ -15,7 +15,7 @@ public class SMPanel extends JPanel {
 	}
 	
 	public void initial() {
-        Dimension preferredSize = new Dimension(UIConst.MAIN_WINDOW_WIDTH-48, UIConst.MAIN_WINDOW_HEIGHT);
+        Dimension preferredSize = new Dimension(UIConst.MAIN_WINDOW_WIDTH-ToolBarPanel.WIDTH, UIConst.MAIN_WINDOW_HEIGHT);
         this.setPreferredSize(preferredSize);
         this.setMaximumSize(preferredSize);
         this.setMinimumSize(preferredSize);

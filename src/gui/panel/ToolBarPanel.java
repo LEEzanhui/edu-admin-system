@@ -1,17 +1,20 @@
 package gui.panel;
 
 import javax.swing.*;
-import java.awt.*;
 
-import gui.IconButton;
+import gui.GUI;
 import gui.UIConst;
-import logic.client.App;
+import gui.component.IconButton;
+
+import java.awt.*;
 
 public class ToolBarPanel extends JPanel {
 	
 	private static IconButton buttonSM;
 	private static IconButton buttonTimetable;
 	private static IconButton buttonSetting;
+	
+	public static int WIDTH;
 	
 	public ToolBarPanel() {
 		initial();
@@ -20,7 +23,7 @@ public class ToolBarPanel extends JPanel {
 	}
 	
 	public void initial() {
-        Dimension preferredSize = new Dimension(48, UIConst.MAIN_WINDOW_HEIGHT);
+        Dimension preferredSize = new Dimension(WIDTH, UIConst.MAIN_WINDOW_HEIGHT);
         this.setPreferredSize(preferredSize);
         this.setMaximumSize(preferredSize);
         this.setMinimumSize(preferredSize);
@@ -54,18 +57,18 @@ public class ToolBarPanel extends JPanel {
 //			buttonTimetable.setIcon(UIConst.ICON_XXX);	//other not chose
 //			buttonSetting.setIcon(UIConst.ICON_set);
 			
-			App.mainPanelpart.removeAll();
+			GUI.mainPanelpart.removeAll();
 //			SMPanel.setContent();
 //			App.mainPanelpart.add(App.loginPanel, BorderLayout.CENTER);
 			
-			App.mainPanelpart.updateUI();
+			GUI.mainPanelpart.updateUI();
 		});
 		
 		buttonTimetable.addActionListener(e -> {
-			App.mainPanelpart.removeAll();
+			GUI.mainPanelpart.removeAll();
 //			App.mainPanelpart.add(App.smPanel, BorderLayout.CENTER);
 			
-			App.mainPanelpart.updateUI();
+			GUI.mainPanelpart.updateUI();
 		});
 		
 //		...
