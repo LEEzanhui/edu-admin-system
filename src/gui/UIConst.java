@@ -20,18 +20,18 @@ public class UIConst {
 	public final static int MAIN_WINDOW_MIN_WIDTH = 400;
 	public final static int MAIN_WINDOW_MIN_HEIGHT = 300;
 	
-//	Ö÷´°¿ÚÍ¼±ê
+//	ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Í¼ï¿½ï¿½
 	public final static String filepath = "";
 	public final static Image IMAGE_ICON = null;	// = ImageIO.read(new File(filepath));
-//	Ö÷´°¿Úbackg color
-	public final static Color MAIN_BACK_COLOR = Color.LIGHT_GRAY;
-//	¹¤¾ßÀ¸backg color
+//	ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½backg color
+	public final static Color MAIN_BACK_COLOR = Color.WHITE;
+//	ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½backg color
 	public final static Color TOOL_BAR_BACK_COLOR = new Color(37, 174, 96);
-//	±í¸ñÏßbackg color
+//	ï¿½ï¿½ï¿½ï¿½ï¿½backg color
 	public final static Color TABLE_LINE_COLOR = new Color(229, 229, 229);
 	
-//	×ÖÌå	
-	public final static Font FONT_TITLE = new Font("ËÎÌå", Font.BOLD, 48);	// = new Font(attributes)
+//	ï¿½ï¿½ï¿½ï¿½	
+	public final static Font FONT_TITLE = new Font("å®‹ä½“", Font.BOLD, 48);	// = new Font(attributes)
 	
 	public final static ImageIcon ICON_DATA_SYNC = null;
 	
@@ -46,29 +46,29 @@ public class UIConst {
 //	signin
 	public final static ImageIcon UNIVERSITY = new ImageIcon("resource//icon//university.jpg");
 	
-    // ÑùÊ½²¼¾ÖÏà¹Ø
+    // ï¿½ï¿½Ê½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
     /**
-     * Ö÷Ãæ°åË®Æ½¼ä¸ô
+     * ï¿½ï¿½ï¿½ï¿½ï¿½Ë®Æ½ï¿½ï¿½ï¿½
      */
     public final static int MAIN_H_GAP = 25;
     /**
-     * Ö÷Ãæ°åLabel ´óÐ¡
+     * ï¿½ï¿½ï¿½ï¿½ï¿½Label ï¿½ï¿½Ð¡
      */
     public final static Dimension LABLE_SIZE = new Dimension(1300, 30);
     /**
-     * Item Label ´óÐ¡
+     * Item Label ï¿½ï¿½Ð¡
      */
     public final static Dimension LABLE_SIZE_ITEM = new Dimension(78, 30);
     /**
-     * Item text field ´óÐ¡
+     * Item text field ï¿½ï¿½Ð¡
      */
     public final static Dimension TEXT_FIELD_SIZE_ITEM = new Dimension(400, 24);
     /**
-     * radio ´óÐ¡
+     * radio ï¿½ï¿½Ð¡
      */
     public final static Dimension RADIO_SIZE = new Dimension(1300, 60);
     /**
-     * ¸ß¼¶Ñ¡ÏîÃæ°åItem ´óÐ¡
+     * ï¿½ß¼ï¿½Ñ¡ï¿½ï¿½ï¿½ï¿½ï¿½Item ï¿½ï¿½Ð¡
      */
     public final static Dimension PANEL_ITEM_SIZE = new Dimension(1300, 40);
 }

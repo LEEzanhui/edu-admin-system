@@ -1,6 +1,7 @@
 package gui;
 
 import java.awt.*;
+import java.net.Socket;
 
 import javax.swing.*;
 
@@ -10,25 +11,17 @@ import gui.panel.ToolBarPanel;
 
 public class GUI {
 
-	private JFrame frame;
+	public JFrame frame;
 
 	public static JPanel mainPanelpart;
 	public static SMPanel smPanel;
 	public static SignInPanel signInPanel;
 	public static ToolBarPanel toolBarPanel;
+	
+	private Socket socket = null;
 
-	public static void main(String[] args) {
-		EventQueue.invokeLater(() -> {
-			try {
-				GUI window = new GUI();
-				window.frame.setVisible(true);
-			} catch (Exception e) {
-				e.printStackTrace();
-			}
-		});
-	}
-
-	public GUI() {
+	public GUI(Socket socket) {
+		this.socket = socket;
 		initial();
 //		loginPanel.buttonStartSchedule.doClick();
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -50,14 +43,13 @@ public class GUI {
 
         JPanel mainPanel = new JPanel(true);
 
-        smPanel = new SMPanel();
-        signInPanel = new SignInPanel();
+        smPanel = new SMPanel(socket);
+        signInPanel = new SignInPanel(socket);
+        toolBarPanel = new ToolBarPanel();
 
 		mainPanelpart = new JPanel(true);
 		mainPanelpart.setLayout(new BorderLayout());
 		mainPanelpart.add(signInPanel, BorderLayout.CENTER);
-
-		toolBarPanel = new ToolBarPanel();
 		
 		mainPanel.setLayout(new BorderLayout());
 		mainPanel.add(toolBarPanel, BorderLayout.WEST);

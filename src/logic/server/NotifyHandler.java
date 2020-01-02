@@ -51,35 +51,35 @@ public class NotifyHandler extends Thread {
 		Message<?> newMsg = null;
 
 		switch (msg.getOpcode()) {		//decide opcode
-		case 0:
+		case "exit":
 			exit(msg);
-		case 1:
+		case "reg":
 			newMsg = register(msg);
 			break;
-		case 2:
+		case "cbi":
 			newMsg = searchCourseById((Message<String>) msg);
 			break;
-		case 3:
+		case "cbn":
 			newMsg = searchCourseByName((Message<String>) msg);
 			break;
-		case 4:
-			newMsg = modifyCourse((Message<Course>)msg);
-			break;
-		case 5:
-			newMsg = deleteCourse((Message<String>) msg);
-			break;
-		case 6:
-			newMsg = searchUserById((Message<String>) msg);
-			break;
-		case 7:
-			newMsg = searchUserByName((Message<String>) msg);
-			break;
-		case 8:
-			newMsg = modifyUser((Message<User>) msg);
-			break;
-		case 9:
-			newMsg = deleteUser((Message<String>) msg);
-			break;
+//		case 4:
+//			newMsg = modifyCourse((Message<Course>)msg);
+//			break;
+//		case 5:
+//			newMsg = deleteCourse((Message<String>) msg);
+//			break;
+//		case 6:
+//			newMsg = searchUserById((Message<String>) msg);
+//			break;
+//		case 7:
+//			newMsg = searchUserByName((Message<String>) msg);
+//			break;
+//		case 8:
+//			newMsg = modifyUser((Message<User>) msg);
+//			break;
+//		case 9:
+//			newMsg = deleteUser((Message<String>) msg);
+//			break;
 		default:
 			other();
 			break;

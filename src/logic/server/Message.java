@@ -8,7 +8,7 @@ import data.*;
 
 public class Message <T> {
 //public class Instruction {
-	private int opcode;
+	private String opcode;
 	private String id;
 	private String password;		
 	
@@ -19,7 +19,7 @@ public class Message <T> {
 		vec = new Vector<T>();
 	}
 
-	public int getOpcode() {
+	public String getOpcode() {
 		return opcode;
 	}
 	public String getId() {
@@ -29,7 +29,7 @@ public class Message <T> {
 		return password;
 	}
 
-	public void setOpcode(int opcode) {
+	public void setOpcode(String opcode) {
 		this.opcode = opcode;
 	}
 	public void setId(String id) {
