@@ -55,7 +55,7 @@ public class GUI {
 
 		mainPanelpart = new JPanel(true);
 		mainPanelpart.setLayout(new BorderLayout());
-		mainPanelpart.add(smPanel, BorderLayout.CENTER);
+		mainPanelpart.add(signInPanel, BorderLayout.CENTER);
 
 		toolBarPanel = new ToolBarPanel();
 		

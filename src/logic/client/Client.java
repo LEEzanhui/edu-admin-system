@@ -53,9 +53,9 @@ public class Client {
 			while(true) {
 				input = new InputStreamReader(System.in);
 				String msg = new BufferedReader(input).readLine();
-				Message message = new Message();
+//				Message message = new Message();
 				
-				oos.writeObject(message);									
+//				oos.writeObject(message);									
 			}
 		}
 		catch (Exception e) {

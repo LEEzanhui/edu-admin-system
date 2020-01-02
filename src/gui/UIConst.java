@@ -24,14 +24,14 @@ public class UIConst {
 	public final static String filepath = "";
 	public final static Image IMAGE_ICON = null;	// = ImageIO.read(new File(filepath));
 //	主窗口backg color
-	public final static Color MAIN_BACK_COLOR = Color.WHITE;
+	public final static Color MAIN_BACK_COLOR = Color.LIGHT_GRAY;
 //	工具栏backg color
 	public final static Color TOOL_BAR_BACK_COLOR = new Color(37, 174, 96);
 //	表格线backg color
 	public final static Color TABLE_LINE_COLOR = new Color(229, 229, 229);
 	
 //	字体	
-	public final static Font FONT = null;	// = new Font(attributes)
+	public final static Font FONT_TITLE = new Font("宋体", Font.BOLD, 48);	// = new Font(attributes)
 	
 	public final static ImageIcon ICON_DATA_SYNC = null;
 	
@@ -42,6 +42,9 @@ public class UIConst {
 	public final static ImageIcon ICON_XXX_ENABLE = new ImageIcon("resource//icon//atom.png");
 //	disable
 	public final static ImageIcon ICON_XXX_DISABLE = new ImageIcon("resource//icon//angel.png");
+
+//	signin
+	public final static ImageIcon UNIVERSITY = new ImageIcon("resource//icon//university.jpg");
 	
     // 样式布局相关
     /**

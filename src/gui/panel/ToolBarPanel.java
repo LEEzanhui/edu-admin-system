@@ -14,7 +14,7 @@ public class ToolBarPanel extends JPanel {
 	private static IconButton buttonTimetable;
 	private static IconButton buttonSetting;
 	
-	public static int WIDTH;
+	public static int WIDTH = 48;
 	
 	public ToolBarPanel() {
 		initial();
@@ -59,14 +59,14 @@ public class ToolBarPanel extends JPanel {
 			
 			GUI.mainPanelpart.removeAll();
 //			SMPanel.setContent();
-//			App.mainPanelpart.add(App.loginPanel, BorderLayout.CENTER);
+			GUI.mainPanelpart.add(GUI.signInPanel, BorderLayout.CENTER);
 			
 			GUI.mainPanelpart.updateUI();
 		});
 		
 		buttonTimetable.addActionListener(e -> {
 			GUI.mainPanelpart.removeAll();
-//			App.mainPanelpart.add(App.smPanel, BorderLayout.CENTER);
+			GUI.mainPanelpart.add(GUI.smPanel, BorderLayout.CENTER);
 			
 			GUI.mainPanelpart.updateUI();
 		});

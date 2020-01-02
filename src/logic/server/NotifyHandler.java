@@ -10,9 +10,8 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.Vector;
 
-import User.*;
+//import User.*;
 import data.*;
-import jdk.nashorn.internal.ir.BreakableNode;
 
 public class NotifyHandler extends Thread {
 	private Socket socket = null;
