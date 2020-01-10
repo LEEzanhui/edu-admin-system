@@ -15,7 +15,7 @@ public class SignInPanel extends JPanel {
 	private JTextField username;
 	private JTextField password;
 	private JButton loginBtn;
-	private JTextArea loginMes;
+	public JTextArea loginMes;
 	
 	private Socket socket = null;
 
@@ -90,7 +90,7 @@ public class SignInPanel extends JPanel {
 //				could we check the format here?
 				
 				message.setOpcode("reg");
-				message.setId(username.getText());
+				message.setId(username.getText());			//这里改改、将用户、密码发过去
 				message.setPassword(password.getText());
 				Client.output(message);
 		});

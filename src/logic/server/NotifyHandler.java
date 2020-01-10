@@ -93,7 +93,7 @@ public class NotifyHandler extends Thread {
 	}
 
 	public Message<Integer> login(Message<?>msg) {
-		Message<Integer> newMsg = new Message<Integer>();
+		Message<Integer> newMsg = new Message<Integer>();		//补充opcode，在client的handleInput处根据opcode处理指令
 		if (userDB.pwdMatched(msg.getId(), msg.getPassword()))
 		  newMsg.getVec().add(1);
 		else newMsg.getVec().add(0);

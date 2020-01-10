@@ -106,7 +106,7 @@ public class Client {
 	public void handleInput(Message<?> msg) {
 		switch (msg.getOpcode()) {
 		case "reg":
-			
+			GUI.signInPanel.loginMes.setText("???");	//like this
 			break;
 
 		default:
