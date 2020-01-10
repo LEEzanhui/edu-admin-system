@@ -37,6 +37,7 @@ public class UserDB {
 
 	private void importUser(String id, BufferedReader br) {
 		try {
+			String password = br.readLine();
 			String name = br.readLine();
 
 			Vector<Authority> authority = new Vector<Authority>();
@@ -57,7 +58,7 @@ public class UserDB {
 				  courses.add(courseStr);
 			}
 
-			User newUser = new User(id, name, other, courses);
+			User newUser = new User(id, password, name, other, courses);
 			users.put(id, newUser);
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -70,6 +71,7 @@ public class UserDB {
 			BufferedWriter out = new BufferedWriter(new FileWriter(file));
 			for(Map.Entry<String, User> entry : users.entrySet()) {
 				out.write(entry.getKey()+"\n");
+				out.write(entry.getValue().password()+"\n");
 				out.write(entry.getValue().name()+"\n");
 
 				Vector<Authority> authority = entry.getValue().authority();
@@ -110,19 +112,37 @@ public class UserDB {
 	}
 
 	// create new users or modify user's info
-	public synchronized void modify(Map<String, User> newUsers) {
+	public synchronized boolean modify(Map<String, User> newUsers) {
 		for (Map.Entry<String, User> entry : newUsers.entrySet())
 			users.put(entry.getKey(), entry.getValue());
+		return true;
 	}
 
-	public synchronized void delete(Vector<String> usersId) {
+	public synchronized boolean delete(Vector<String> usersId) {
 		for (String userId : usersId)
 			users.remove(userId);
+		return true;
 	}
 
 	private boolean isMatched(String userKey, String inputKey) {
 		int len = inputKey.length();
 		return len >= 3 && userKey.substring(0, len).equals(inputKey);
+	}
+
+	public boolean pwdMatched(String id, String inputPwd) {
+		return users.get(id).password().equals(inputPwd);
+	}
+
+	public String getNewId() {
+		if (users.keySet().isEmpty())
+		  return new String("0000001");
+		String maxId = "0000000";
+		for (String id : users.keySet()) {
+			if (maxId.compareTo(id) < 0)
+			  maxId = id;
+		}
+		String newId = String.valueOf(Integer.parseInt(maxId)+1);
+		return newId;
 	}
 
 //	public void print() {

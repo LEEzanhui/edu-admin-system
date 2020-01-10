@@ -6,21 +6,24 @@ import data.users.Authority;
 
 public class User {
 	protected String id="";
+	protected String password="password";
 	protected String name="";
 	protected Vector<Authority> authority = new Vector<Authority>();
 	protected String other="";
 	protected Vector<String> courses = new Vector<String>(); // store courses' id
 
 	public User() {}
-	public User(String id, String name, String other) {
+	public User(String id, String password, String name, String other) {
 		this.id = id;
+		this.password = password;
 		this.name = name;
 		this.other = other;
 	}
-	public User(String id, String name,
+	public User(String id, String password, String name,
 				String other, Vector<String> courses) {
 
 		this.id = id;
+		this.password = password;
 		this.name = name;
 		this.other = other;
 		this.courses = courses;
@@ -28,6 +31,9 @@ public class User {
 
 	public String id() {
 		return id;
+	}
+	public String password() {
+		return password;
 	}
 	public String name() {
 		return name;

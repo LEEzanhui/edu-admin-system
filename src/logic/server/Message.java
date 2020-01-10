@@ -7,11 +7,10 @@ import java.util.Vector;
 import data.*;
 
 public class Message <T> {
-//public class Instruction {
 	private String opcode;
 	private String id;
-	private String password;		
-	
+	private String password;
+
 	//Store various input information (such as the number of a series of courses)
 	private Vector<T> vec;
 
@@ -25,7 +24,7 @@ public class Message <T> {
 	public String getId() {
 		return id;
 	}
-	public String password() {
+	public String getPassword() {
 		return password;
 	}
 

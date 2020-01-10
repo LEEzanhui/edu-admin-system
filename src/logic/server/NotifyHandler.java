@@ -16,13 +16,13 @@ import data.*;
 public class NotifyHandler extends Thread {
 	private Socket socket = null;
 	private InputStream in = null;
-	private CourseDB courseDataBase;
-	private UserDB userDataBase;
+	private CourseDB courseDB;
+	private UserDB userDB;
 
-	public NotifyHandler(Socket socket, UserDB userDataBase, CourseDB courseDataBase) {
+	public NotifyHandler(Socket socket, UserDB userDB, CourseDB courseDB) {
 		this.socket = socket;
-		this.userDataBase = userDataBase;
-		this.courseDataBase = courseDataBase;
+		this.userDB = userDB;
+		this.courseDB = courseDB;
 	}
 
 	public void run() {
@@ -50,57 +50,74 @@ public class NotifyHandler extends Thread {
 	public Message<?> decode(Message<?> msg) {
 		Message<?> newMsg = null;
 
-		switch (msg.getOpcode()) {		//decide opcode
+		switch (msg.getOpcode()) {
+		case "login":
+			newMsg = login(msg);
+			break;
 		case "exit":
 			exit(msg);
-		case "reg":
-			newMsg = register(msg);
 			break;
-		case "cbi":
+		case "regi":
+			newMsg = register((Message<User>)msg);
+			break;
+		case "seacourseid":
 			newMsg = searchCourseById((Message<String>) msg);
 			break;
-		case "cbn":
+		case "seacoursen":
 			newMsg = searchCourseByName((Message<String>) msg);
 			break;
-//		case 4:
-//			newMsg = modifyCourse((Message<Course>)msg);
-//			break;
-//		case 5:
-//			newMsg = deleteCourse((Message<String>) msg);
-//			break;
-//		case 6:
-//			newMsg = searchUserById((Message<String>) msg);
-//			break;
-//		case 7:
-//			newMsg = searchUserByName((Message<String>) msg);
-//			break;
-//		case 8:
-//			newMsg = modifyUser((Message<User>) msg);
-//			break;
-//		case 9:
-//			newMsg = deleteUser((Message<String>) msg);
-//			break;
+		case "modcourse":
+			newMsg = modifyCourse((Message<Course>)msg);
+			break;
+		case "delcourse":
+			newMsg = deleteCourse((Message<String>) msg);
+			break;
+		case "seauserid":
+			newMsg = searchUserById((Message<String>) msg);
+			break;
+		case "seausername":
+			newMsg = searchUserByName((Message<String>) msg);
+			break;
+		case "moduser":
+			newMsg = modifyUser((Message<User>) msg);
+			break;
+		case "deluser":
+			newMsg = deleteUser((Message<String>) msg);
+			break;
 		default:
 			other();
 			break;
 		}
+		newMsg.setOpcode(msg.getOpcode());
 		return newMsg;
 	}
 
-
+	public Message<Integer> login(Message<?>msg) {
+		Message<Integer> newMsg = new Message<Integer>();
+		if (userDB.pwdMatched(msg.getId(), msg.getPassword()))
+		  newMsg.getVec().add(1);
+		else newMsg.getVec().add(0);
+		return newMsg;
+	}
 	public Message<?> exit(Message<?> msg) {
 
 		return msg;
 	}
-	public Message<?> register(Message<?> msg) {
-
-		return msg;
+	public Message<Integer> register(Message<User> msg) {
+		Map<String, User> newUser = new HashMap<String, User>();
+		String newId = userDB.getNewId();
+		newUser.put(newId, msg.getVec().firstElement());
+		Message<Integer> newMsg = new Message<Integer>();
+		if (userDB.modify(newUser))
+		  newMsg.getVec().add(1);
+		else newMsg.getVec().add(0);
+		return newMsg;
 	}
 	public Message<Course> searchCourseById(Message<String> msg) {
 		Message<Course> newMsg = new Message<Course>();
 		newMsg.setId(msg.getId());
 
-		Vector<Course> course = courseDataBase.searchByCourseId(msg.getVec().get(0));
+		Vector<Course> course = courseDB.searchByCourseId(msg.getVec().get(0));
 		newMsg.setVec(course);
 		return newMsg;
 	}
@@ -108,7 +125,7 @@ public class NotifyHandler extends Thread {
 		Message<Course> newMsg = new Message<Course>();
 		newMsg.setId(msg.getId());
 
-		Vector<Course> course = courseDataBase.searchByName(msg.getVec().get(0));
+		Vector<Course> course = courseDB.searchByName(msg.getVec().get(0));
 		newMsg.setVec(course);
 		return newMsg;
 	}
@@ -122,7 +139,7 @@ public class NotifyHandler extends Thread {
 			for(Course temp : msg.getVec()) {
 				revision.put(temp.courseId(), temp);
 			}
-			courseDataBase.modify(revision);
+			courseDB.modify(revision);
 		} catch (Exception e) {
 			e.getMessage();
 			out.add(e.getMessage());
@@ -136,7 +153,7 @@ public class NotifyHandler extends Thread {
 		Vector<String> out = new Vector<String>();
 
 		try {
-			courseDataBase.delete(msg.getVec());
+			courseDB.delete(msg.getVec());
 		} catch (Exception e) {
 			e.getMessage();
 			out.add(e.getMessage());
@@ -151,7 +168,7 @@ public class NotifyHandler extends Thread {
 		Vector<String> out = new Vector<String>();
 
 		try {
-			userDataBase.delete(msg.getVec());
+			userDB.delete(msg.getVec());
 		} catch (Exception e) {
 			e.getMessage();
 			out.add(e.getMessage());
@@ -170,7 +187,7 @@ public class NotifyHandler extends Thread {
 			for(User temp : msg.getVec()) {
 				revision.put(temp.id(), temp);
 			}
-			userDataBase.modify(revision);
+			userDB.modify(revision);
 		} catch (Exception e) {
 			e.getMessage();
 			out.add(e.getMessage());
@@ -183,7 +200,7 @@ public class NotifyHandler extends Thread {
 		Message<User> newMsg = new Message<User>();
 		newMsg.setId(msg.getId());
 
-		Vector<User> user = userDataBase.searchByName(msg.getVec().get(0));
+		Vector<User> user = userDB.searchByName(msg.getVec().get(0));
 		newMsg.setVec(user);
 		return newMsg;
 	}
@@ -192,7 +209,7 @@ public class NotifyHandler extends Thread {
 		Message<User> newMsg = new Message<User>();
 		newMsg.setId(msg.getId());
 
-		Vector<User> user = userDataBase.searchById(msg.getVec().get(0));
+		Vector<User> user = userDB.searchById(msg.getVec().get(0));
 		newMsg.setVec(user);
 		return newMsg;
 	}
