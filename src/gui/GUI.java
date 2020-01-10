@@ -6,7 +6,7 @@ import java.net.Socket;
 import javax.swing.*;
 
 import gui.panel.SignInPanel;
-import gui.panel.SMPanel;
+import gui.panel.SelectCoursePanel;
 import gui.panel.ToolBarPanel;
 
 public class GUI {
@@ -14,7 +14,7 @@ public class GUI {
 	public JFrame frame;
 
 	public static JPanel mainPanelpart;
-	public static SMPanel smPanel;
+	public static SelectCoursePanel smPanel;
 	public static SignInPanel signInPanel;
 	public static ToolBarPanel toolBarPanel;
 	
@@ -43,7 +43,7 @@ public class GUI {
 
         JPanel mainPanel = new JPanel(true);
 
-        smPanel = new SMPanel(socket);
+        smPanel = new SelectCoursePanel(socket);
         signInPanel = new SignInPanel(socket);
         toolBarPanel = new ToolBarPanel();
 

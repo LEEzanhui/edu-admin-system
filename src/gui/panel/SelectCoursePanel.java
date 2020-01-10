@@ -7,25 +7,33 @@ import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableModel;
 
+import com.sun.org.apache.bcel.internal.generic.IF_ACMPEQ;
+
 import gui.UIConst;
 import gui.component.MyButtonEditor;
 import gui.component.MyButtonRender;
 import sun.tools.jar.resources.jar;
 
-public class SMPanel extends JPanel {
+public class SelectCoursePanel extends JPanel {
 	private JTextField textField;
 	private JButton search;
 	private JTable table;
 	
 //	test
-	Object[][] object;
+//	Object[][] object;
 //	test
 	
 	private Socket socket = null;
 	
-	TableModel tableModel = new DefaultTableModel(8, 8);
+	TableModel tableModel = new DefaultTableModel(8, 8) {
+		public boolean isCellEditable(int rowIndex,int columnIndex) {
+			if(columnIndex!=7) return false;//这个是可以编辑的列
+			//if(rowIndex!=0) return false;
+			return true;
+		}
+	};
 
-	public SMPanel(Socket socket) {
+	public SelectCoursePanel(Socket socket) {
 		this.socket = socket;
 		initial();
 		addListener();
@@ -35,8 +43,9 @@ public class SMPanel extends JPanel {
 //		test
 		table = new JTable();
 		table.setModel(tableModel);
-		table.getColumnModel().getColumn(2).setCellRenderer(new MyButtonRender());	//button in table
-		table.getColumnModel().getColumn(2).setCellEditor(new MyButtonEditor());
+//		table.setEnabled(false);
+		table.getColumnModel().getColumn(7).setCellRenderer(new MyButtonRender());	//button in table
+		table.getColumnModel().getColumn(7).setCellEditor(new MyButtonEditor(table));	//我尝试在这里面实现按钮事件监听
 		tableModel.setValueAt(1, 0, 0);
 //		test
 		

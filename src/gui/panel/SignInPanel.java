@@ -8,7 +8,6 @@ import gui.UIConst;
 import logic.server.Message;
 
 import java.awt.*;
-import java.io.*;
 import java.net.Socket;
 
 public class SignInPanel extends JPanel {
