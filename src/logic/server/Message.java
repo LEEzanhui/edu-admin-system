@@ -17,6 +17,10 @@ public class Message <T> {
 	public Message() {
 		vec = new Vector<T>();
 	}
+	public Message(String opcode, String id, String password) {
+		
+		vec = new Vector<T>();
+	}
 
 	public String getOpcode() {
 		return opcode;

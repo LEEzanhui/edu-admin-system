@@ -17,10 +17,6 @@ public class UIConst {
 
 	public final static int MAIN_WINDOW_WIDTH = 885;
 	public final static int MAIN_WINDOW_HEIGHT = 636;
-	public final static int MAIN_WINDOW_MAX_WIDTH = 1920;
-	public final static int MAIN_WINDOW_MAX_HEIGHT = 1080;
-	public final static int MAIN_WINDOW_MIN_WIDTH = 400;
-	public final static int MAIN_WINDOW_MIN_HEIGHT = 300;
 
 //	������ͼ��
 	public final static String filepath = "";

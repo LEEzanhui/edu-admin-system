@@ -9,8 +9,6 @@ import gui.component.IconButton;
 import java.awt.*;
 
 public class ToolBarPanel extends JPanel {
-
-	public boolean logIn = false;		//未登录-》登录界面；已登录-》信息界面
 	
 	public IconButton buttonStatus;
 	public IconButton buttonTimetable;
@@ -59,11 +57,7 @@ public class ToolBarPanel extends JPanel {
 	public void addListener() {
 		buttonStatus.addActionListener(e -> {
 			window.mainPanel.removeAll();
-			if(logIn == false)
-				window.mainPanel.add(window.signInPanel, BorderLayout.CENTER);
-			else
-				window.mainPanel.add(window.infoPanel, BorderLayout.CENTER);
-			
+			window.mainPanel.add(window.infoPanel, BorderLayout.CENTER);
 			window.mainPanel.updateUI();
 		});
 

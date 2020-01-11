@@ -36,7 +36,7 @@ public class Client {
 	}
 
 	public Client() {
-//		socketStart();				正常运行时启动
+		socketStart();
 		System.out.println(socket);
 		window = new GUI();
 		window.frame.setVisible(true);
