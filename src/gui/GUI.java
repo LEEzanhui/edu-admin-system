@@ -13,11 +13,11 @@ public class GUI {
 
 	public JFrame frame;
 
-	public static JPanel mainPanelpart;
+	public static JPanel mainPanel;
 	public static SelectCoursePanel smPanel;
 	public static SignInPanel signInPanel;
 	public static ToolBarPanel toolBarPanel;
-	
+
 	private Socket socket = null;
 
 	public GUI(Socket socket) {
@@ -41,20 +41,20 @@ public class GUI {
 		frame.setResizable(false);
         frame.setBackground(UIConst.MAIN_BACK_COLOR);
 
-        JPanel mainPanel = new JPanel(true);
+        JPanel panel = new JPanel(true);
 
         smPanel = new SelectCoursePanel(socket);
         signInPanel = new SignInPanel(socket);
         toolBarPanel = new ToolBarPanel();
 
-		mainPanelpart = new JPanel(true);
-		mainPanelpart.setLayout(new BorderLayout());
-		mainPanelpart.add(signInPanel, BorderLayout.CENTER);
-		
+		mainPanel = new JPanel(true);
 		mainPanel.setLayout(new BorderLayout());
-		mainPanel.add(toolBarPanel, BorderLayout.WEST);
-		mainPanel.add(mainPanelpart, BorderLayout.CENTER);
+		mainPanel.add(signInPanel, BorderLayout.CENTER);
 
-		frame.add(mainPanel);
+		panel.setLayout(new BorderLayout());
+		panel.add(toolBarPanel, BorderLayout.WEST);
+		panel.add(mainPanel, BorderLayout.CENTER);
+
+		frame.add(panel);
 	}
 }

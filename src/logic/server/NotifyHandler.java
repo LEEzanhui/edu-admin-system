@@ -19,6 +19,7 @@ public class NotifyHandler extends Thread {
 	private CourseDB courseDB;
 	private UserDB userDB;
 
+
 	public NotifyHandler(Socket socket, UserDB userDB, CourseDB courseDB) {
 		this.socket = socket;
 		this.userDB = userDB;
@@ -29,7 +30,6 @@ public class NotifyHandler extends Thread {
 		try {
 			in = socket.getInputStream();
 			ObjectInputStream ois = new ObjectInputStream(in);
-
 			while(true) {
 					Message<?> msg = (Message<?>) ois.readObject();
 
@@ -39,8 +39,7 @@ public class NotifyHandler extends Thread {
 					oos.writeObject(newMsg);
 			}
 
-		}
-		catch (IOException | ClassNotFoundException e) {
+		} catch (IOException | ClassNotFoundException e) {
 			e.printStackTrace();
 		}
 
@@ -161,7 +160,6 @@ public class NotifyHandler extends Thread {
 		newMsg.setVec(out);
 		return newMsg;
 	}
-
 	private Message<String> deleteUser(Message<String> msg) {
 		Message<String> newMsg = new Message<String>();
 		newMsg.setId(msg.getId());
@@ -176,7 +174,6 @@ public class NotifyHandler extends Thread {
 		newMsg.setVec(out);
 		return newMsg;
 	}
-
 	private Message<String> modifyUser(Message<User> msg) {
 		Message<String> newMsg = new Message<String>();
 		newMsg.setId(msg.getId());
@@ -195,7 +192,6 @@ public class NotifyHandler extends Thread {
 		newMsg.setVec(out);
 		return newMsg;
 	}
-
 	private Message<User> searchUserByName(Message<String> msg) {
 		Message<User> newMsg = new Message<User>();
 		newMsg.setId(msg.getId());
@@ -204,7 +200,6 @@ public class NotifyHandler extends Thread {
 		newMsg.setVec(user);
 		return newMsg;
 	}
-
 	private Message<User> searchUserById(Message<String> msg) {
 		Message<User> newMsg = new Message<User>();
 		newMsg.setId(msg.getId());

@@ -7,19 +7,19 @@ import java.awt.*;
 //import java.io.File;
 
 public class UIConst {
-	
+
 	public final static String APP_NAME = "Educational Administration System";
-	
+
 	public final static int MAIN_WINDOW_X = 100;
 	public final static int MAIN_WINDOW_Y = 40;
-	
+
 	public final static int MAIN_WINDOW_WIDTH = 885;
 	public final static int MAIN_WINDOW_HEIGHT = 636;
 	public final static int MAIN_WINDOW_MAX_WIDTH = 1920;
 	public final static int MAIN_WINDOW_MAX_HEIGHT = 1080;
 	public final static int MAIN_WINDOW_MIN_WIDTH = 400;
 	public final static int MAIN_WINDOW_MIN_HEIGHT = 300;
-	
+
 //	������ͼ��
 	public final static String filepath = "";
 	public final static Image IMAGE_ICON = null;	// = ImageIO.read(new File(filepath));
@@ -29,12 +29,12 @@ public class UIConst {
 	public final static Color TOOL_BAR_BACK_COLOR = new Color(37, 174, 96);
 //	�����backg color
 	public final static Color TABLE_LINE_COLOR = new Color(229, 229, 229);
-	
-//	����	
-	public final static Font FONT_TITLE = new Font("宋体", Font.BOLD, 48);	// = new Font(attributes)
-	
+
+//	����
+	public final static Font TITLE_FONT = new Font("宋体", Font.BOLD, 30);	// = new Font(attributes)
+
 	public final static ImageIcon ICON_DATA_SYNC = null;
-	
+
 //	ToolBarIcon
 //	default
 	public final static ImageIcon ICON_XXX = new ImageIcon("resource//icon//setting.png");
@@ -45,7 +45,7 @@ public class UIConst {
 
 //	signin
 	public final static ImageIcon UNIVERSITY = new ImageIcon("resource//icon//university.jpg");
-	
+
     // ��ʽ�������
     /**
      * �����ˮƽ���

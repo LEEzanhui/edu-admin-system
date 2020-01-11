@@ -68,7 +68,7 @@ public class Client {
 						while(true) {
 							in = socket.getInputStream();
 							ObjectInputStream ois = new ObjectInputStream(in);
-							Message<?> msg = (Message<?>)ois.readObject();
+							Message<?> msg = (Message<?>) ois.readObject();
 							System.out.println("Receive: " + msg.getOpcode());
 
 //							guess
@@ -89,7 +89,7 @@ public class Client {
 	public void handleInput(Message<?> msg) {
 		switch (msg.getOpcode()) {
 		case "reg":
-			GUI.signInPanel.loginMes.setText("???");
+//			GUI.signInPanel.loginMes.setText("???");
 			break;
 
 		default:
