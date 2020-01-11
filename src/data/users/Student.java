@@ -10,9 +10,9 @@ public class Student extends User {
     private int credit;
     private Map<String, Integer> scores;
 
-    public Student(String id, String name, String other,
+    public Student(String id, String password, String name, String other,
     				int grade, int credit, Map<String, Integer> scores) {
-    	super(id, name, other);
+    	super(id, password, name, other);
     	authority.add(Authority.STUDENT);
     	this.grade = grade;
     	this.credit = credit;
