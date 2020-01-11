@@ -1,5 +1,6 @@
 package logic.client;
 
+import java.awt.BorderLayout;
 import java.awt.EventQueue;
 import java.io.BufferedReader;
 import java.io.InputStream;
@@ -37,7 +38,7 @@ public class Client {
 	public Client() {
 //		socketStart();				正常运行时启动
 		System.out.println(socket);
-		window = new GUI(socket);
+		window = new GUI();
 		window.frame.setVisible(true);
 	}
 
@@ -89,9 +90,15 @@ public class Client {
 	public void handleInput(Message<?> msg) {
 		switch (msg.getOpcode()) {
 		case "reg":
-//			GUI.signInPanel.loginMes.setText("???");
-			GUI.toolBarPanel.buttonSM.setEnabled(true);		//用于启用其它功能
-			GUI.toolBarPanel.buttonTimetable.setEnabled(true);
+			window.toolBarPanel.buttonStatus.setEnabled(true);		//用于启用其它功能
+			window.toolBarPanel.buttonTimetable.setEnabled(true);//用于启用其它功能
+			
+			if(true || false) {
+				window.mainPanel.removeAll();
+				window.mainPanel.add(window.infoPanel, BorderLayout.CENTER);
+				window.mainPanel.updateUI();
+			}
+			
 			break;
 
 		default:

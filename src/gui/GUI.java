@@ -5,23 +5,22 @@ import java.net.Socket;
 
 import javax.swing.*;
 
-import gui.panel.SignInPanel;
-import gui.panel.SelectCoursePanel;
-import gui.panel.ToolBarPanel;
+import gui.panel.*;
 
 public class GUI {
 
 	public JFrame frame;
 
-	public static JPanel mainPanel;
-	public static SelectCoursePanel smPanel;
-	public static SignInPanel signInPanel;
-	public static ToolBarPanel toolBarPanel;
+	public JPanel mainPanel;
+	public SelectCoursePanel scPanel;
+	public SignInPanel signInPanel;
+	public ToolBarPanel toolBarPanel;
+	public InfoPanel infoPanel;
 
-	private Socket socket = null;
+//	private Socket socket = null;
 
-	public GUI(Socket socket) {
-		this.socket = socket;
+	public GUI() {
+//		this.socket = socket;
 		initial();
 //		loginPanel.buttonStartSchedule.doClick();
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -37,22 +36,24 @@ public class GUI {
 //			new Dimension(UIConst.MAIN_WINDOW_MAX_WIDTH, UIConst.MAIN_WINDOW_MAX_HEIGHT));
 //		frame.setMinimumSize(
 //			new Dimension(UIConst.MAIN_WINDOW_MIN_WIDTH, UIConst.MAIN_WINDOW_MIN_HEIGHT));
-//        frame.setIconImage(UIConst.IMAGE_ICON);
+        frame.setIconImage(UIConst.IMAGE_ICON);
 		frame.setResizable(false);
         frame.setBackground(UIConst.MAIN_BACK_COLOR);
 
         JPanel panel = new JPanel(true);
 
-        smPanel = new SelectCoursePanel(socket);
-        signInPanel = new SignInPanel(socket);
-        toolBarPanel = new ToolBarPanel();
-
-        ToolBarPanel.buttonSM.setEnabled(false);
-        ToolBarPanel.buttonTimetable.setEnabled(false);        
-//        ToolBarPanel.buttonSetting.setEnabled(false);
-        
 		mainPanel = new JPanel(true);
 		mainPanel.setLayout(new BorderLayout());
+        
+        scPanel = new SelectCoursePanel(this);
+        signInPanel = new SignInPanel(this);
+        toolBarPanel = new ToolBarPanel(this);
+        infoPanel = new InfoPanel(this);
+
+        toolBarPanel.buttonStatus.setEnabled(false);
+        toolBarPanel.buttonTimetable.setEnabled(false);        
+//        ToolBarPanel.buttonSetting.setEnabled(false);
+        
 		mainPanel.add(signInPanel, BorderLayout.CENTER);
 
 		panel.setLayout(new BorderLayout());

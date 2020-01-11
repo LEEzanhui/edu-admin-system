@@ -20,12 +20,15 @@ public class SignInPanel extends JPanel {
 	private JTextField password;
 	private JButton loginBtn;
 	// public JTextArea loginMes;
+	
+	private GUI window;
 
-	private Socket socket = null;
+//	private Socket socket = null;
 
-	public SignInPanel(Socket socket) {
+	public SignInPanel(GUI window) {
 		super();
-		this.socket = socket;
+		this.window = window;
+//		this.socket = socket;
 		initial();
 		addListener();
 	}
@@ -103,8 +106,12 @@ public class SignInPanel extends JPanel {
 			message.setPassword(password.getText());
 //			Client.output(message);						//实际运行时启用
 			
-			GUI.toolBarPanel.buttonSM.setEnabled(true);		//用于测试，实际运行时删除（点击后启用侧边栏按钮）
-			GUI.toolBarPanel.buttonTimetable.setEnabled(true);//用于测试，实际运行时删除
+			window.toolBarPanel.buttonStatus.setEnabled(true);		//用于测试，实际运行时删除（点击后启用侧边栏按钮）
+			window.toolBarPanel.buttonTimetable.setEnabled(true);//用于测试，实际运行时删除
+			window.mainPanel.removeAll();//用于测试，实际运行时删除
+			window.mainPanel.add(window.infoPanel, BorderLayout.CENTER);//用于测试，实际运行时删除
+			window.mainPanel.updateUI();//用于测试，实际运行时删除
+			window.toolBarPanel.logIn = true;//用于测试，实际运行时删除
 		});
 	}
 }

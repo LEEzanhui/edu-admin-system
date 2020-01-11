@@ -6,6 +6,7 @@ import java.net.Socket;
 import javax.swing.*;
 import javax.swing.table.*;
 
+import gui.GUI;
 import gui.UIConst;
 import gui.component.MyButtonEditor;
 import gui.component.MyButtonRender;
@@ -18,7 +19,7 @@ public class SelectCoursePanel extends JPanel {
 	
 	private TableRowSorter<TableModel> sorter ;
 	
-	private Socket socket = null;
+//	private Socket socket = null;
 	
 	private String column_names[]= {"1","2","3","4","5","6","7","8"};	//table header
 	
@@ -30,8 +31,8 @@ public class SelectCoursePanel extends JPanel {
 		}
 	};
 
-	public SelectCoursePanel(Socket socket) {
-		this.socket = socket;
+	public SelectCoursePanel(GUI window) {
+//		this.socket = socket;
 		initial();
 		addListener();
 	}

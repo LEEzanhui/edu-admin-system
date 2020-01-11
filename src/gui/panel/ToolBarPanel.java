@@ -10,13 +10,18 @@ import java.awt.*;
 
 public class ToolBarPanel extends JPanel {
 
-	public static IconButton buttonSM;
-	public static IconButton buttonTimetable;
-	public static IconButton buttonSetting;
+	public boolean logIn = false;		//未登录-》登录界面；已登录-》信息界面
+	
+	public IconButton buttonStatus;
+	public IconButton buttonTimetable;
+	public IconButton buttonSetting;
 
+	private GUI window;
+	
 	public static int WIDTH = 48;
 
-	public ToolBarPanel() {
+	public ToolBarPanel(GUI window) {
+		this.window = window;
 		initial();
 		addButton();
 		addListener();
@@ -39,11 +44,11 @@ public class ToolBarPanel extends JPanel {
 		panelD.setBackground(UIConst.TOOL_BAR_BACK_COLOR);
 		panelD.setLayout(new BorderLayout(0, 0));
 
-		buttonSM = new IconButton(UIConst.ICON_XXX, UIConst.ICON_XXX_ENABLE, UIConst.ICON_XXX_DISABLE, "tip");
-		buttonTimetable = new IconButton(UIConst.ICON_XXX_ENABLE, UIConst.ICON_XXX_DISABLE, UIConst.ICON_XXX, "???");
+		buttonStatus = new IconButton(UIConst.ICON_STATUS, UIConst.ICON_STATUS_ENABLE, UIConst.ICON_STATUS_DISABLE, "tip");
+		buttonTimetable = new IconButton(UIConst.ICON_STATUS, UIConst.ICON_STATUS_ENABLE, UIConst.ICON_STATUS_DISABLE, "???");
 //		buttonSetting = null;
 
-		panelU.add(buttonSM);
+		panelU.add(buttonStatus);
 //		panelU.add(buttonTimetable);
 		panelD.add(buttonTimetable, BorderLayout.SOUTH);
 
@@ -52,23 +57,21 @@ public class ToolBarPanel extends JPanel {
 	}
 
 	public void addListener() {
-		buttonSM.addActionListener(e -> {
-//			buttonSM.setIcon(UIConst.ICON_XXX_ENABLE);	//be chose
-//			buttonTimetable.setIcon(UIConst.ICON_XXX);	//other not chose
-//			buttonSetting.setIcon(UIConst.ICON_set);
-
-			GUI.mainPanel.removeAll();
-//			SMPanel.setContent();
-			GUI.mainPanel.add(GUI.signInPanel, BorderLayout.CENTER);
-
-			GUI.mainPanel.updateUI();
+		buttonStatus.addActionListener(e -> {
+			window.mainPanel.removeAll();
+			if(logIn == false)
+				window.mainPanel.add(window.signInPanel, BorderLayout.CENTER);
+			else
+				window.mainPanel.add(window.infoPanel, BorderLayout.CENTER);
+			
+			window.mainPanel.updateUI();
 		});
 
 		buttonTimetable.addActionListener(e -> {
-			GUI.mainPanel.removeAll();
-			GUI.mainPanel.add(GUI.smPanel, BorderLayout.CENTER);
+			window.mainPanel.removeAll();
+			window.mainPanel.add(window.scPanel, BorderLayout.CENTER);
 
-			GUI.mainPanel.updateUI();
+			window.mainPanel.updateUI();
 		});
 
 //		...

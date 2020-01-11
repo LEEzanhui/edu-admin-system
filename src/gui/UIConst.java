@@ -1,10 +1,12 @@
 package gui;
 
+import javax.imageio.ImageIO;
 //import javax.imageio.ImageIO;
 //import com.sun.prism.Image;
 import javax.swing.*;
 import java.awt.*;
 //import java.io.File;
+import java.io.File;
 
 public class UIConst {
 
@@ -22,7 +24,7 @@ public class UIConst {
 
 //	������ͼ��
 	public final static String filepath = "";
-	public final static Image IMAGE_ICON = null;	// = ImageIO.read(new File(filepath));
+	public final static Image IMAGE_ICON = null;
 //	������backg color
 	public final static Color MAIN_BACK_COLOR = Color.WHITE;
 //	������backg color
@@ -33,16 +35,26 @@ public class UIConst {
 //	����
 	public final static Font TITLE_FONT = new Font("宋体", Font.BOLD, 30);	// = new Font(attributes)
 
-	public final static ImageIcon ICON_DATA_SYNC = null;
+//	public final static ImageIcon ICON_DATA_SYNC = null;
 
 //	ToolBarIcon
 //	default
-	public final static ImageIcon ICON_XXX = new ImageIcon("resource//icon//setting.png");
+	public final static ImageIcon ICON_STATUS = new ImageIcon("resource//icon//status.png");
 //	enable
-	public final static ImageIcon ICON_XXX_ENABLE = new ImageIcon("resource//icon//atom.png");
+	public final static ImageIcon ICON_STATUS_ENABLE = new ImageIcon("resource//icon//statusEnable.png");
 //	disable
-	public final static ImageIcon ICON_XXX_DISABLE = new ImageIcon("resource//icon//angel.png");
-
+	public final static ImageIcon ICON_STATUS_DISABLE = new ImageIcon("resource//icon//status.png");
+	
+	public final static ImageIcon ICON_SETTING = new ImageIcon("resource//icon//setting.png");
+	public final static ImageIcon ICON_SETTING_ENABLE = new ImageIcon("resource//icon//settingEnable.png");
+	
+	public final static ImageIcon ICON_SCHEDULE = new ImageIcon("resource//icon//schedule.png");
+	public final static ImageIcon ICON_SCHEDULE_ENABLE = new ImageIcon("resource//icon//scheduleEnable.png");	
+	
+	public final static ImageIcon ICON_ABOUT = new ImageIcon("resource//icon//schedule.png");
+	
+	public final static ImageIcon ICON_UPDATE = new ImageIcon("resource//icon//update.png");
+	
 //	signin
 	public final static ImageIcon UNIVERSITY = new ImageIcon("resource//icon//university.jpg");
 
