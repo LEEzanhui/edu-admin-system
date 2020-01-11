@@ -70,7 +70,7 @@ public class ToolBarPanel extends JPanel {
 		buttonTimetable.addActionListener(e -> {
 			window.mainPanel.removeAll();
 			window.mainPanel.add(window.scPanel, BorderLayout.CENTER);
-
+//			在这边实现update数据
 			window.mainPanel.updateUI();
 		});
 

@@ -44,6 +44,8 @@ public class SelectCoursePanel extends JPanel {
 		table.getColumnModel().getColumn(7).setCellRenderer(new MyButtonRender());	//button in table第几列
 		table.getColumnModel().getColumn(7).setCellEditor(new MyButtonEditor(table));	//我尝试在这里面实现按钮事件监听
 		tableModel.setValueAt(1, 0, 0);
+		table.setRowHeight(18);// 设置表格行宽
+		table.getColumnModel().getColumn(0).setPreferredWidth(50);	//设置列宽
 		table.getTableHeader().setReorderingAllowed(false);		//不让JTABLE中的列任意换位置
 		
         Dimension preferredSize = new Dimension(UIConst.MAIN_WINDOW_WIDTH-ToolBarPanel.WIDTH, UIConst.MAIN_WINDOW_HEIGHT);
@@ -64,18 +66,18 @@ public class SelectCoursePanel extends JPanel {
 //		c.gridwidth = 1;
 		c.gridy = 0;
 		filterText = new JTextField(13);
-		search = new JButton("search");
-		update = new JButton("刷新");
-//		table = new JTable();
-		
 		gridbag.setConstraints(filterText, c);
 		panel.add(filterText);
+		c.gridy = 1;
+		search = new JButton("search");
 		gridbag.setConstraints(search, c);
 		panel.add(search);
+		c.gridy = 2;
+		update = new JButton("刷新");
 		gridbag.setConstraints(update, c);
 		panel.add(update);
 		
-		c.gridy = 1;
+		c.gridy = 3;
 		sorter = new TableRowSorter<TableModel>(tableModel);
 		table.setRowSorter(sorter);
 		JScrollPane scrollPane = new JScrollPane(table);		//JTable
