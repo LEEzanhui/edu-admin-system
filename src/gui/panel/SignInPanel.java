@@ -53,6 +53,9 @@ public class SignInPanel extends JPanel {
 
 		GridBagConstraints gbc = new GridBagConstraints();
 		gbc.fill = GridBagConstraints.BOTH;
+		gbc.insets = new Insets(10, 10, 10, 10);
+//		gbc.ipadx = 10;
+//		gbc.ipady = 10;
 		
 		JPanel introPanel = new JPanel();
 		JTextArea intro = new JTextArea("introasd\nsadsadsdsadsad....");
