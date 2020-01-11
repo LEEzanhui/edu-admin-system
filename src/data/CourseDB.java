@@ -43,7 +43,6 @@ public class CourseDB {
 			line = br.readLine();
 			Vector<String> student = new Vector<String>();
 			while(line.equals("end-student") != true) {
-				System.out.println(line);
 				student.add(line);
 				line = br.readLine();
 			}
