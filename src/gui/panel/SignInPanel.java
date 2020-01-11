@@ -3,7 +3,7 @@ package gui.panel;
 import javax.swing.*;
 
 import logic.client.*;
-
+import gui.GUI;
 import gui.UIConst;
 import logic.server.Message;
 
@@ -101,7 +101,10 @@ public class SignInPanel extends JPanel {
 			message.setOpcode("reg");
 			message.setId(username.getText());			//这里改改、将用户、密码发过去
 			message.setPassword(password.getText());
-			Client.output(message);
+//			Client.output(message);						//实际运行时启用
+			
+			GUI.toolBarPanel.buttonSM.setEnabled(true);		//用于测试，实际运行时删除（点击后启用侧边栏按钮）
+			GUI.toolBarPanel.buttonTimetable.setEnabled(true);//用于测试，实际运行时删除
 		});
 	}
 }

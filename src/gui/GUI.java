@@ -47,6 +47,10 @@ public class GUI {
         signInPanel = new SignInPanel(socket);
         toolBarPanel = new ToolBarPanel();
 
+        ToolBarPanel.buttonSM.setEnabled(false);
+        ToolBarPanel.buttonTimetable.setEnabled(false);        
+//        ToolBarPanel.buttonSetting.setEnabled(false);
+        
 		mainPanel = new JPanel(true);
 		mainPanel.setLayout(new BorderLayout());
 		mainPanel.add(signInPanel, BorderLayout.CENTER);

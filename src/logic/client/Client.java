@@ -35,7 +35,7 @@ public class Client {
 	}
 
 	public Client() {
-		socketStart();
+//		socketStart();				正常运行时启动
 		System.out.println(socket);
 		window = new GUI(socket);
 		window.frame.setVisible(true);
@@ -90,6 +90,8 @@ public class Client {
 		switch (msg.getOpcode()) {
 		case "reg":
 //			GUI.signInPanel.loginMes.setText("???");
+			GUI.toolBarPanel.buttonSM.setEnabled(true);		//用于启用其它功能
+			GUI.toolBarPanel.buttonTimetable.setEnabled(true);
 			break;
 
 		default:

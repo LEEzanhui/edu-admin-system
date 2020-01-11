@@ -10,9 +10,9 @@ import java.awt.*;
 
 public class ToolBarPanel extends JPanel {
 
-	private static IconButton buttonSM;
-	private static IconButton buttonTimetable;
-	private static IconButton buttonSetting;
+	public static IconButton buttonSM;
+	public static IconButton buttonTimetable;
+	public static IconButton buttonSetting;
 
 	public static int WIDTH = 48;
 
