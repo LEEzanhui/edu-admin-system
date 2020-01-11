@@ -18,7 +18,8 @@ public class SignInPanel extends JPanel {
 	private JLabel pwdLabel;
 	private JTextField username;
 	private JTextField password;
-	private JButton loginBtn;
+	private JButton signinBtn;
+	private JButton signupBtn;
 
 	private GUI window;
 
@@ -51,16 +52,18 @@ public class SignInPanel extends JPanel {
 		contentPanel.setLayout(gbLayout);
 
 		GridBagConstraints gbc = new GridBagConstraints();
-
+		gbc.fill = GridBagConstraints.BOTH;
+		
 		JPanel introPanel = new JPanel();
 		JTextArea intro = new JTextArea("introasd\nsadsadsdsadsad....");
-		intro.setEditable(false);
+//		intro.setEditable(false);
 		introPanel.add(intro);
-		gbc.gridheight = 4;
+		gbc.gridheight = 5;
 		gbc.gridwidth = 1;
 		gbc.gridx = 0;
 		gbc.gridy = 0;
 		gbc.weightx = 0.5;
+		gbc.weighty = 1;
 		gbLayout.setConstraints(introPanel, gbc);
 		contentPanel.add(introPanel);
 
@@ -76,46 +79,60 @@ public class SignInPanel extends JPanel {
 		gbc.gridwidth = 5;
 		gbc.gridx = 1;
 		gbc.gridy = 0;
-		gbc.weightx = 0.1;
+		gbc.weightx = 0.5;
+		gbc.weighty = 0.5;
 		gbLayout.setConstraints(picture, gbc);
 		contentPanel.add(picture);
 
-		usernLabel = new JLabel("username", null, JLabel.LEFT);
-		gbc.gridwidth = 2;
+		usernLabel = new JLabel("username", null, JLabel.CENTER);
+		gbc.gridwidth = 1;
 		gbc.gridy = 1;
 		gbc.weightx = 0.1;
+		gbc.weighty = 0.2;
 		gbLayout.setConstraints(usernLabel, gbc);
 		contentPanel.add(usernLabel);
 
 		username = new JTextField(40);
-//		username.setPreferredSize(new Dimension(100, 40));
-		username.setMaximumSize(new Dimension(100, 40));
-		gbc.gridwidth = 3;
-		gbc.gridx = 3;
+		username.setPreferredSize(new Dimension(100, 40));
+		gbc.gridx = 2;
+		gbc.gridwidth = 4;
+		gbc.weightx = 0.4;
 		gbLayout.setConstraints(username, gbc);
 		contentPanel.add(username);
 
-		pwdLabel = new JLabel("password", null, JLabel.LEFT);
-		gbc.gridwidth = 2;
+		pwdLabel = new JLabel("password", null, JLabel.CENTER);
+		gbc.gridwidth = 1;
 		gbc.gridx = 1;
 		gbc.gridy = 2;
+		gbc.weightx = 0.1;
 		gbLayout.setConstraints(pwdLabel, gbc);
 		contentPanel.add(pwdLabel);
 
 		password = new JTextField(40);
 		password.setPreferredSize(new Dimension(100, 40));
-		gbc.gridwidth = 3;
-		gbc.gridx = 3;
+		gbc.gridwidth = 4;
+		gbc.gridx = 2;
+		gbc.weightx = 0.4;
 		gbLayout.setConstraints(password, gbc);
 		contentPanel.add(password);
 
-		loginBtn = new JButton("Sign in");
-		loginBtn.setPreferredSize(new Dimension(200, 40));
-		gbc.gridwidth = 3;
+		signupBtn = new JButton("Sign ip");
+		signupBtn.setPreferredSize(new Dimension(200, 40));
+		gbc.gridwidth = 2;
 		gbc.gridx = 2;
-		gbc.gridy = 4;
-		gbLayout.setConstraints(loginBtn, gbc);
-		contentPanel.add(loginBtn);
+		gbc.gridy = 3;
+		gbc.weightx = 0.2;
+		gbc.weighty = 0.1;
+		gbLayout.setConstraints(signupBtn, gbc);
+		contentPanel.add(signupBtn);
+		
+		signinBtn = new JButton("Sign in");
+		signinBtn.setPreferredSize(new Dimension(200, 40));
+		gbc.gridwidth = 2;
+		gbc.gridx = 4;
+		gbc.weightx = 0.2;
+		gbLayout.setConstraints(signinBtn, gbc);
+		contentPanel.add(signinBtn);
 
 
 		this.add(titlePanel, BorderLayout.NORTH);
@@ -123,21 +140,21 @@ public class SignInPanel extends JPanel {
 	}
 
 	public void addListener() {
-//		loginBtn.addActionListener(e -> {
-//			Message<Integer> message = new Message<Integer>();		//type doesn't matter, right?
-//
-////				could we check the format here?
-//
-//			message.setOpcode("reg");
-//			message.setId(username.getText());			//这里改改、将用户、密码发过去
-//			message.setPassword(password.getText());
-////			Client.output(message);						//实际运行时启用
-//
-//			window.toolBarPanel.buttonStatus.setEnabled(true);		//用于测试，实际运行时删除（点击后启用侧边栏按钮）
-//			window.toolBarPanel.buttonTimetable.setEnabled(true);//用于测试，实际运行时删除
-//			window.mainPanel.removeAll();//用于测试，实际运行时删除
-//			window.mainPanel.add(window.infoPanel, BorderLayout.CENTER);//用于测试，实际运行时删除
-//			window.mainPanel.updateUI();//用于测试，实际运行时删除
-//		});
+		signupBtn.addActionListener(e -> {
+			Message<Integer> message = new Message<Integer>();		//type doesn't matter, right?
+
+//				could we check the format here?
+
+			message.setOpcode("reg");
+			message.setId(username.getText());			//这里改改、将用户、密码发过去
+			message.setPassword(password.getText());
+//			Client.output(message);						//实际运行时启用
+
+			window.toolBarPanel.buttonStatus.setEnabled(true);		//用于测试，实际运行时删除（点击后启用侧边栏按钮）
+			window.toolBarPanel.buttonTimetable.setEnabled(true);//用于测试，实际运行时删除
+			window.mainPanel.removeAll();//用于测试，实际运行时删除
+			window.mainPanel.add(window.infoPanel, BorderLayout.CENTER);//用于测试，实际运行时删除
+			window.mainPanel.updateUI();//用于测试，实际运行时删除
+		});
 	}
 }
