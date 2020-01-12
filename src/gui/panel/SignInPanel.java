@@ -165,11 +165,11 @@ public class SignInPanel extends JPanel {
 			Message<String> message = new Message<String>("regi", vec);
 			Client.send(message);
 
-			window.toolBarPanel.buttonStatus.setEnabled(true);		//用于测试，实际运行时删除（点击后启用侧边栏按钮）
-			window.toolBarPanel.buttonTimetable.setEnabled(true);//用于测试，实际运行时删除
-			window.mainPanel.removeAll();//用于测试，实际运行时删除
-			window.mainPanel.add(window.infoPanel, BorderLayout.CENTER);//用于测试，实际运行时删除
-			window.mainPanel.updateUI();//用于测试，实际运行时删除
+//			window.toolBarPanel.buttonStatus.setEnabled(true);		//用于测试，实际运行时删除（点击后启用侧边栏按钮）
+//			window.toolBarPanel.buttonTimetable.setEnabled(true);//用于测试，实际运行时删除
+//			window.mainPanel.removeAll();//用于测试，实际运行时删除
+//			window.mainPanel.add(window.infoPanel, BorderLayout.CENTER);//用于测试，实际运行时删除
+//			window.mainPanel.updateUI();//用于测试，实际运行时删除
 		});
 
 		signinBtn.addActionListener(e -> {

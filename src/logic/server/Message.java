@@ -1,12 +1,13 @@
 package logic.server;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Vector;
 
 import data.*;
 
-public class Message <T> {
+public class Message <T> implements Serializable {
 	private String opcode;
 	private String id;
 	private String password;

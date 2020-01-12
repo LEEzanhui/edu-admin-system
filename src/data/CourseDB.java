@@ -14,7 +14,7 @@ public class CourseDB {
 	public CourseDB() {
 		try {
 
-			String pathname = "./course.txt";
+			String pathname = "./data/courseDB.txt";
 			File filename = new File(pathname);
 			InputStreamReader reader = new InputStreamReader(new FileInputStream(filename));
 			BufferedReader br = new BufferedReader(reader);
@@ -37,20 +37,27 @@ public class CourseDB {
 			ans.setCourseId(line);
 			line = br.readLine();
 			ans.setName(line);
+			System.out.println(line);
 			line = br.readLine();
 			ans.setTeacherId(line);
+			System.out.println(line);
 
 			line = br.readLine();
+			System.out.println(line);
+			
 			Vector<String> student = new Vector<String>();
 			while(line.equals("end-student") != true) {
 				student.add(line);
+//				System.out.println(line);
 				line = br.readLine();
+//				System.out.println(line);
 			}
+			ans.setStudent(student);
 
 			line = br.readLine();
-			line = br.readLine();
+//			line = br.readLine();
 			ans.setOtherIndo(line);
-
+			
 			courses.put(ans.courseId(), ans);
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -59,16 +66,18 @@ public class CourseDB {
 	}
 
 	public void writeBack() {	//unchecked!
-		File file = new File("./user.txt");
+		File file = new File("./data/courseDB.txt");
 		try {
 			BufferedWriter out = new BufferedWriter(new FileWriter(file));
 			for(Map.Entry<String, Course> entry : courses.entrySet()) {
 				out.write(entry.getKey()+"\n");
 				out.write(entry.getValue().name()+"\n");
+//				System.out.println(entry.getValue().name());
 				out.write(entry.getValue().teacherId()+"\n");
 				out.flush();
 
 				Vector<String> stud = entry.getValue().student();
+				System.out.println(stud == null);
 				for(int i=0; i<stud.size(); i++) {
 					out.write(stud.get(i)+"\n");
 				}
@@ -85,9 +94,9 @@ public class CourseDB {
 	public synchronized Vector<Course> searchByCourseId(String id) {
 		int length = id.length();
 		Vector<Course> ans = new Vector<Course>();
-		if(length <= 3) {
-			return ans;
-		}
+//		if(length <= 3) {
+//			return ans;
+//		}
 
 		for (Map.Entry<String, Course> entry : courses.entrySet()) {
 			if(entry.getValue().courseId().substring(0, length).equals(id)) {

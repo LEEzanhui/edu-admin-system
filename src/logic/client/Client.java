@@ -12,7 +12,13 @@ import java.net.InetAddress;
 import java.net.Socket;
 import java.util.Vector;
 
+import javax.swing.table.DefaultTableModel;
+import javax.swing.table.TableModel;
+
+import data.Course;
 import gui.GUI;
+import gui.component.MyButtonEditor;
+import gui.component.MyButtonRender;
 import logic.Configuration;
 import logic.server.Message;
 
@@ -101,7 +107,16 @@ public class Client implements java.io.Serializable{
 				window.mainPanel.updateUI();
 			}
 			break;
+		case "seacourseid":
+			Vector<Course> vec1 = (Vector<Course>)msg.getVec();
 
+			for(int i=0; i<vec1.size(); i++) {
+				window.scPanel.tableModel.setValueAt(vec1.get(i).courseId(), 0, 0);
+				window.scPanel.tableModel.setValueAt(vec1.get(i).name(), i, 1);
+				window.scPanel.tableModel.setValueAt(vec1.get(i).teacherId(), i, 2);
+				window.scPanel.tableModel.setValueAt(vec1.get(i).other(), i, 3);
+			}
+			
 		default:
 			break;
 		}

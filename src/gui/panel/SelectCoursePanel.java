@@ -2,30 +2,34 @@ package gui.panel;
 
 import java.awt.*;
 import java.net.Socket;
+import java.util.Vector;
 
 import javax.swing.*;
 import javax.swing.table.*;
+
+import logic.client.*;
 
 import gui.GUI;
 import gui.UIConst;
 import gui.component.MyButtonEditor;
 import gui.component.MyButtonRender;
+import logic.server.Message;
 
 public class SelectCoursePanel extends JPanel {
 	private JTextField filterText;
 	private JButton search;
 	private JButton update;
-	private JTable table;
+	public JTable table;
 	
 	private TableRowSorter<TableModel> sorter ;
 	
 //	private Socket socket = null;
 	
-	private String column_names[]= {"1","2","3","4","5","6","7","8"};	//table header
+	private String column_names[]= {"id","name","teacher","other","choose"};	//table header
 	
-	TableModel tableModel = new DefaultTableModel(column_names, 8) {
+	public TableModel tableModel = new DefaultTableModel(column_names, 8) {
 		public boolean isCellEditable(int rowIndex,int columnIndex) {
-			if(columnIndex!=7) return false;//这个是可以编辑的列
+			if(columnIndex!=4) return false;//这个是可以编辑的列
 			//if(rowIndex!=0) return false;
 			return true;
 		}
@@ -39,11 +43,11 @@ public class SelectCoursePanel extends JPanel {
 	
 	public void initial() {
 		table = new JTable();
+		
 		table.setModel(tableModel);
 //		table.setEnabled(false);
-		table.getColumnModel().getColumn(7).setCellRenderer(new MyButtonRender());	//button in table第几列
-		table.getColumnModel().getColumn(7).setCellEditor(new MyButtonEditor(table));	//我尝试在这里面实现按钮事件监听
-		tableModel.setValueAt(1, 0, 0);
+		table.getColumnModel().getColumn(4).setCellRenderer(new MyButtonRender());	//button in table第几列
+		table.getColumnModel().getColumn(4).setCellEditor(new MyButtonEditor(table));	//我尝试在这里面实现按钮事件监听
 		table.setRowHeight(18);// 设置表格行宽
 		table.getColumnModel().getColumn(0).setPreferredWidth(50);	//设置列宽
 		table.getTableHeader().setReorderingAllowed(false);		//不让JTABLE中的列任意换位置
@@ -104,12 +108,18 @@ public class SelectCoursePanel extends JPanel {
 		});
 		
 		update.addActionListener(e -> {
-//			for test
-			for(int i=0; i<5; i++) {
-				for(int j=0; j<5; j++) {
-					tableModel.setValueAt(i*j, i, j);
-				}
-			}
+			Vector<String> vec = new Vector<String>();
+			vec.add("1");
+			Message<String> message = new Message<String>("selecourse", vec);
+			message.setOpcode("seacourseid");
+			Client.send(message);
+			
+			//			for test
+//			for(int i=0; i<5; i++) {
+//				for(int j=0; j<5; j++) {
+//					tableModel.setValueAt(i*j, i, j);
+//				}
+//			}
 //			test
 		});
 	}

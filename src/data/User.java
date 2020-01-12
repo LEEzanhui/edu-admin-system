@@ -1,10 +1,11 @@
 package data;
 
+import java.io.Serializable;
 import java.util.Vector;
 
 import data.users.Authority;
 
-public class User {
+public class User implements Serializable {
 	protected String id="";
 	protected String password="password";
 	protected String name="";

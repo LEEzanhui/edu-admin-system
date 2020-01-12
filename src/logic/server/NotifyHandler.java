@@ -7,6 +7,7 @@ import java.io.ObjectOutputStream;
 import java.io.OutputStream;
 import java.io.Serializable;
 import java.net.Socket;
+import java.net.SocketException;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Vector;
@@ -32,14 +33,22 @@ public class NotifyHandler extends Thread {
 		try {
 			in = socket.getInputStream();
 			System.out.println(socket);
-			ObjectInputStream ois = new ObjectInputStream(in);
+			ObjectInputStream ois = null;	
+			
 			while(true) {
-					Message<?> msg = (Message<?>) ois.readObject();
-
-					Message<?> newMsg = decode(msg);
-					OutputStream out = socket.getOutputStream();
-					ObjectOutputStream oos = new ObjectOutputStream(out);
-					oos.writeObject(newMsg);
+				Message<?> msg = null;
+				Message<?> newMsg = null;
+//				try {
+					ois = new ObjectInputStream(in);
+					msg = (Message<?>) ois.readObject();
+					newMsg = decode(msg);						
+//				} catch (Exception e) {
+//					System.out.println("Connect reset");
+//					return;
+//				}
+				OutputStream out = socket.getOutputStream();
+				ObjectOutputStream oos = new ObjectOutputStream(out);
+				oos.writeObject(newMsg);
 			}
 
 		} catch (IOException | ClassNotFoundException e) {
@@ -108,9 +117,9 @@ public class NotifyHandler extends Thread {
 	public Message<Integer> register(Message<String> msg) {
 		Map<String, User> newUsers = new HashMap<String, User>();
 		String newId = userDB.getNewId();
-		String username = msg.getVec().get(1);
+		String username = msg.getVec().get(0);
 		System.out.println(username);
-		String password = msg.getVec().get(2);
+		String password = msg.getVec().get(1);
 		String other = "";
 		User newUser = new User(newId, password, username, other);
 		

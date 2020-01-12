@@ -1,10 +1,11 @@
 package data;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Map;
 import java.util.Vector;
 
-public class Course {
+public class Course implements Serializable {
 	private String id;
 	private String name;
 	private String teacherId;
@@ -49,5 +50,4 @@ public class Course {
 	public void setOtherIndo(String info) {
 		this.other = info;
 	}
-
 }
