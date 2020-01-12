@@ -7,7 +7,7 @@ import javax.swing.*;
 
 import gui.panel.*;
 
-public class GUI {
+public class GUI{
 
 	public JFrame frame;
 
@@ -32,10 +32,6 @@ public class GUI {
 		frame.setTitle(UIConst.APP_NAME);
 		frame.setBounds(UIConst.MAIN_WINDOW_X, UIConst.MAIN_WINDOW_Y,
 				UIConst.MAIN_WINDOW_WIDTH, UIConst.MAIN_WINDOW_HEIGHT);
-//		frame.setMaximumSize(
-//			new Dimension(UIConst.MAIN_WINDOW_MAX_WIDTH, UIConst.MAIN_WINDOW_MAX_HEIGHT));
-//		frame.setMinimumSize(
-//			new Dimension(UIConst.MAIN_WINDOW_MIN_WIDTH, UIConst.MAIN_WINDOW_MIN_HEIGHT));
         frame.setIconImage(UIConst.IMAGE_ICON);
 		frame.setResizable(false);
         frame.setBackground(UIConst.MAIN_BACK_COLOR);
@@ -54,7 +50,8 @@ public class GUI {
         toolBarPanel.buttonTimetable.setEnabled(false);        
 //        ToolBarPanel.buttonSetting.setEnabled(false);
         
-		mainPanel.add(signInPanel, BorderLayout.CENTER);
+        mainPanel.add(signInPanel, BorderLayout.CENTER);
+//        mainPanel.add(infoPanel, BorderLayout.CENTER);
 
 		panel.setLayout(new BorderLayout());
 		panel.add(toolBarPanel, BorderLayout.WEST);

@@ -49,13 +49,13 @@ public class SignInPanel extends JPanel {
 		JPanel contentPanel = new JPanel();
 //		contentPanel.setBackground(UIConst.BACKGROND);
 		contentPanel.setBackground(UIConst.MAIN_BACK_COLOR);
-		
+
 		GridBagLayout gbLayout = new GridBagLayout();
 		contentPanel.setLayout(gbLayout);
 
 		GridBagConstraints gbc = new GridBagConstraints();
 		gbc.fill = GridBagConstraints.BOTH;
-		
+
 		JTextArea intro = new JTextArea(
 				"本教务系统可以帮助你快速查询学校开设课程。。。\n"
 				+ "\n"
@@ -97,13 +97,14 @@ public class SignInPanel extends JPanel {
 		contentPanel.add(picture);
 
 		usernLabel = new JLabel("username / id", null, JLabel.CENTER);
+		usernLabel.setFont(UIConst.LABEL_FONT);
+		contentPanel.add(usernLabel);
 		gbc.gridwidth = 1;
 		gbc.gridy = 1;
 		gbc.weightx = 0.1;
 		gbc.weighty = 0.2;
 		gbc.insets = new Insets(10, 10, 10, 10);
 		gbLayout.setConstraints(usernLabel, gbc);
-		contentPanel.add(usernLabel);
 
 		username = new JTextField(40);
 //		gbc.ipadx = 10;
@@ -116,6 +117,7 @@ public class SignInPanel extends JPanel {
 		contentPanel.add(username);
 
 		pwdLabel = new JLabel("password", null, JLabel.CENTER);
+		pwdLabel.setFont(UIConst.LABEL_FONT);
 		gbc.gridwidth = 1;
 		gbc.gridx = 1;
 		gbc.gridy = 2;
@@ -141,7 +143,7 @@ public class SignInPanel extends JPanel {
 		gbc.insets = new Insets(10, 10, 10, 10);
 		gbLayout.setConstraints(signupBtn, gbc);
 		contentPanel.add(signupBtn);
-		
+
 		signinBtn = new JButton("Sign in");
 		gbc.gridwidth = 2;
 		gbc.gridx = 4;
@@ -169,7 +171,7 @@ public class SignInPanel extends JPanel {
 			window.mainPanel.add(window.infoPanel, BorderLayout.CENTER);//用于测试，实际运行时删除
 			window.mainPanel.updateUI();//用于测试，实际运行时删除
 		});
-		
+
 		signinBtn.addActionListener(e -> {
 			Message<String> message = new Message<String>(
 					"login", username.getText(), password.getText());

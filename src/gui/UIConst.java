@@ -33,6 +33,7 @@ public class UIConst {
 	public final static Font TITLE_FONT = new Font("宋体", Font.BOLD, 30);	// = new Font(attributes)
 	
 	public final static Font INTRO_FONT = new Font("宋体", Font.BOLD, 18);
+	public final static Font LABEL_FONT = new Font("宋体", Font.BOLD, 18);
 	
 //	public final static ImageIcon BACKGROND = new ImageIcon("resource//icon//background.png"); 
 	public final static Color INTRO_BACKGROND = new Color(231, 231, 231);

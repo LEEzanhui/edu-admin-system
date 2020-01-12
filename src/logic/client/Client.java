@@ -10,12 +10,13 @@ import java.io.ObjectOutputStream;
 import java.io.OutputStream;
 import java.net.InetAddress;
 import java.net.Socket;
+import java.util.Vector;
 
 import gui.GUI;
 import logic.Configuration;
 import logic.server.Message;
 
-public class Client {
+public class Client implements java.io.Serializable{
 	private static Socket socket = null;
 	private InputStreamReader input = null;
 	private InputStream in = null;
@@ -73,7 +74,6 @@ public class Client {
 							Message<?> msg = (Message<?>) ois.readObject();
 							System.out.println("Receive: " + msg.getOpcode());
 
-//							guess
 							handleInput(msg);
 						}
 					}
@@ -88,18 +88,18 @@ public class Client {
 		}
 	}
 
+	@SuppressWarnings("unchecked")
 	public void handleInput(Message<?> msg) {
 		switch (msg.getOpcode()) {
-		case "reg":
-			window.toolBarPanel.buttonStatus.setEnabled(true);		//用于启用其它功能
-			window.toolBarPanel.buttonTimetable.setEnabled(true);//用于启用其它功能
-			
-			if(true || false) {
+		case "regi": case "login": 
+			Vector<Integer> vec = (Vector<Integer>) msg.getVec();
+			if(vec.firstElement() == 1) {
+				window.toolBarPanel.buttonStatus.setEnabled(true);		//用于启用其它功能
+				window.toolBarPanel.buttonTimetable.setEnabled(true);//用于启用其它功能
 				window.mainPanel.removeAll();
 				window.mainPanel.add(window.infoPanel, BorderLayout.CENTER);
 				window.mainPanel.updateUI();
 			}
-			
 			break;
 
 		default:

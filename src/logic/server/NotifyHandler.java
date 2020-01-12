@@ -96,9 +96,9 @@ public class NotifyHandler extends Thread {
 
 	public Message<Integer> login(Message<String>msg) {
 		Message<Integer> newMsg = new Message<Integer>();
-		if (userDB.pwdMatched(msg.getId(), msg.getPassword()))
-		  newMsg.getVec().add(1);
-		else newMsg.getVec().add(0);
+		if (userDB.pwdMatched(msg.getId(), msg.getPassword())) {
+			newMsg.getVec().add(1);
+		} else newMsg.getVec().add(0);
 		return newMsg;
 	}
 	public Message<?> exit(Message<?> msg) {
@@ -124,7 +124,6 @@ public class NotifyHandler extends Thread {
 	public Message<Course> searchCourseById(Message<String> msg) {
 		Message<Course> newMsg = new Message<Course>();
 		newMsg.setId(msg.getId());
-
 		Vector<Course> course = courseDB.searchByCourseId(msg.getVec().get(0));
 		newMsg.setVec(course);
 		return newMsg;
