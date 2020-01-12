@@ -95,6 +95,10 @@ public class NotifyHandler extends Thread {
 		case "deluser":
 			newMsg = deleteUser((Message<String>) msg);
 			break;
+		case "choosecourse":
+//			newMsg = choose((Message<String>) msg);
+			newMsg = (Message<String>) msg;
+			break;
 		default:
 			other();
 			break;

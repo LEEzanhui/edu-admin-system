@@ -1,5 +1,6 @@
 package gui.component;
 
+import java.awt.Color;
 import java.awt.Component;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -52,10 +53,10 @@ public class MyButtonEditor extends DefaultCellEditor
  
     private void initButton()
     {
-        this.button = new JButton();
+        this.button = new JButton("已发送");
  
         // 设置按钮的大小及位置。
-        this.button.setBounds(0, 0, 50, 15);
+        this.button.setBounds(0, 0, 100, 15);
  
         // 为按钮添加事件。这里只能添加ActionListner事件，Mouse事件无效。
         this.button.addActionListener(new ActionListener()
@@ -71,7 +72,7 @@ public class MyButtonEditor extends DefaultCellEditor
 				String getname= table.getValueAt(count, 0).toString();//读取你获取行号的某一列的值（也就是字段）
 				Message<String> message = new Message<String>();
 				
-				message.setOpcode("choose this course");
+				message.setOpcode("choosecourse");
 				Vector<String> out = new Vector<String>();
 				out.add(getname);				//将课程名传走（暂定）
 				message.setVec(out);

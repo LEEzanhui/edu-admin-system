@@ -98,15 +98,17 @@ public class UserDB {
 	public synchronized Vector<User> searchById(String id) {
 		Vector<User> result = new Vector<User>();
 		for(Map.Entry<String, User> entry : users.entrySet())
-		  if (isMatched(entry.getKey(), id))
-			result.add(entry.getValue());
+		  if (isMatched(entry.getKey(), id)) {
+//			  System.out.println("!");
+			  result.add(entry.getValue());			  
+		  }
 		return result;
 	}
 
 	public synchronized Vector<User> searchByName(String name) {
 		Vector<User> result = new Vector<User>();
 		for(Map.Entry<String, User> entry : users.entrySet())
-		  if (isMatched(entry.getKey(), name))
+		  if (isMatched(entry.getValue().name(), name))
 			result.add(entry.getValue());
 		return result;
 	}
@@ -126,6 +128,10 @@ public class UserDB {
 
 	private boolean isMatched(String userKey, String inputKey) {
 		int len = inputKey.length();
+		if(userKey.length() < len) {
+			return false;
+		}
+//		System.out.println(userKey.substring(0, len));
 		return len >= 3 && userKey.substring(0, len).equals(inputKey);
 	}
 

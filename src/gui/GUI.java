@@ -16,6 +16,7 @@ public class GUI{
 	public SignInPanel signInPanel;
 	public ToolBarPanel toolBarPanel;
 	public InfoPanel infoPanel;
+	public searchStuPanel ssPanel;
 
 //	private Socket socket = null;
 
@@ -45,10 +46,11 @@ public class GUI{
         signInPanel = new SignInPanel(this);
         toolBarPanel = new ToolBarPanel(this);
         infoPanel = new InfoPanel(this);
+        ssPanel = new searchStuPanel(this);
 
         toolBarPanel.buttonStatus.setEnabled(false);
         toolBarPanel.buttonTimetable.setEnabled(false);        
-//        ToolBarPanel.buttonSetting.setEnabled(false);
+        toolBarPanel.buttonSetting.setEnabled(false);
         
         mainPanel.add(signInPanel, BorderLayout.CENTER);
 //        mainPanel.add(infoPanel, BorderLayout.CENTER);

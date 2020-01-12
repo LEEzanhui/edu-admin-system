@@ -42,12 +42,12 @@ public class ToolBarPanel extends JPanel {
 		panelD.setBackground(UIConst.TOOL_BAR_BACK_COLOR);
 		panelD.setLayout(new BorderLayout(0, 0));
 
-		buttonStatus = new IconButton(UIConst.ICON_STATUS, UIConst.ICON_STATUS_ENABLE, UIConst.ICON_STATUS_DISABLE, "tip");
-		buttonTimetable = new IconButton(UIConst.ICON_STATUS, UIConst.ICON_STATUS_ENABLE, UIConst.ICON_STATUS_DISABLE, "???");
-//		buttonSetting = null;
+		buttonStatus = new IconButton(UIConst.ICON_STATUS, UIConst.ICON_STATUS_ENABLE, UIConst.ICON_STATUS_DISABLE, "info");
+		buttonTimetable = new IconButton(UIConst.ICON_SCHEDULE, UIConst.ICON_SCHEDULE_ENABLE, UIConst.ICON_SCHEDULE, "selectCourse");
+		buttonSetting = new IconButton(UIConst.ICON_ABOUT, UIConst.ICON_SETTING_ENABLE, UIConst.ICON_ABOUT, "searchUser");
 
 		panelU.add(buttonStatus);
-//		panelU.add(buttonTimetable);
+		panelU.add(buttonSetting);
 		panelD.add(buttonTimetable, BorderLayout.SOUTH);
 
 		this.add(panelU);
@@ -67,7 +67,12 @@ public class ToolBarPanel extends JPanel {
 //			在这边实现update数据
 			window.mainPanel.updateUI();
 		});
-
+		
+		buttonSetting.addActionListener(e -> {
+			window.mainPanel.removeAll();
+			window.mainPanel.add(window.ssPanel, BorderLayout.CENTER);
+			window.mainPanel.updateUI();
+		});
 //		...
 	}
 }

@@ -37,13 +37,13 @@ public class CourseDB {
 			ans.setCourseId(line);
 			line = br.readLine();
 			ans.setName(line);
-			System.out.println(line);
+//			System.out.println(line);
 			line = br.readLine();
 			ans.setTeacherId(line);
-			System.out.println(line);
+//			System.out.println(line);
 
 			line = br.readLine();
-			System.out.println(line);
+//			System.out.println(line);
 			
 			Vector<String> student = new Vector<String>();
 			while(line.equals("end-student") != true) {
@@ -77,7 +77,7 @@ public class CourseDB {
 				out.flush();
 
 				Vector<String> stud = entry.getValue().student();
-				System.out.println(stud == null);
+//				System.out.println(stud == null);
 				for(int i=0; i<stud.size(); i++) {
 					out.write(stud.get(i)+"\n");
 				}

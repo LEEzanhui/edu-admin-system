@@ -16,6 +16,7 @@ import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableModel;
 
 import data.Course;
+import data.User;
 import gui.GUI;
 import gui.component.MyButtonEditor;
 import gui.component.MyButtonRender;
@@ -102,6 +103,7 @@ public class Client implements java.io.Serializable{
 			if(vec.firstElement() == 1) {
 				window.toolBarPanel.buttonStatus.setEnabled(true);		//用于启用其它功能
 				window.toolBarPanel.buttonTimetable.setEnabled(true);//用于启用其它功能
+				window.toolBarPanel.buttonSetting.setEnabled(true);
 				window.mainPanel.removeAll();
 				window.mainPanel.add(window.infoPanel, BorderLayout.CENTER);
 				window.mainPanel.updateUI();
@@ -111,12 +113,24 @@ public class Client implements java.io.Serializable{
 			Vector<Course> vec1 = (Vector<Course>)msg.getVec();
 
 			for(int i=0; i<vec1.size(); i++) {
-				window.scPanel.tableModel.setValueAt(vec1.get(i).courseId(), 0, 0);
+				window.scPanel.tableModel.setValueAt(vec1.get(i).courseId(), i, 0);
 				window.scPanel.tableModel.setValueAt(vec1.get(i).name(), i, 1);
 				window.scPanel.tableModel.setValueAt(vec1.get(i).teacherId(), i, 2);
 				window.scPanel.tableModel.setValueAt(vec1.get(i).other(), i, 3);
 			}
-			
+		case "seauserid":case "seausername":
+			Vector<User> vec11 = (Vector<User>)msg.getVec();
+//			System.out.println(vec11.size());
+			for(int i=0; i<18; i++) {
+				for(int j=0; j<3; j++) {
+					window.ssPanel.tableModel.setValueAt("", i, j);
+				}
+			}
+			for(int i=0; i<vec11.size(); i++) {
+				window.ssPanel.tableModel.setValueAt(vec11.get(i).id(), i, 0);
+				window.ssPanel.tableModel.setValueAt(vec11.get(i).name(), i, 1);
+				window.ssPanel.tableModel.setValueAt(vec11.get(i).other(), i, 2);
+			}
 		default:
 			break;
 		}
