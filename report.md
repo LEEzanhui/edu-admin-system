@@ -24,17 +24,17 @@
 由上面的图片可知，我们所设计的模糊查询，只要课程中有相应的关键字，即可查询到对应的信息。
 
 ## 系统类图
-![]()
+![UML]()
 
 ## 关键模块说明
-### 项目框架
 我们的分成源码、数据、以及外部资源和程序截图等。
 data文件夹用于持久化存储数据，使用了文件存储技术。
 ![structure](/screenshot/structure.jpg)
 
 我们的项目设计主要使用了三层架构的设计模式。即，界面层（User Interface layer）、业务逻辑层（Business Logic Layer）、数据访问层（Data access layer）。这样的设计方式旨在降低程序之间的耦合度，方便我们的修改。
 ![3-tierArchitecture](/screenshot/3-tierArchitecture.jpg)
-#### 数据层类
+
+### 数据层类
 数据层的类有四个```Course```、```CourseDB```、```User```、```UserDB```。
 通过上面的系统类图可以很清晰地看出他们之间的关系。
 ```User```中可以访问该用户已经选择的课程，```Course```中也可以查看选择该课程的用户。
@@ -43,10 +43,37 @@ data文件夹用于持久化存储数据，使用了文件存储技术。
 <img style="width: 403.2px;height: 302.4px;" src="/screenshot/UserDB.jpg"/> -->
 ![CourseDB](/screenshot/CourseDB.jpg)
 ![UserDB](/screenshot/UserDB.jpg)
-#### 界面层类
+
+### 界面层类
 界面层类里主要有```GUI```一个主类，```UIConst```主要记下```GUI```界面所用到的相关设置。```gui```内有一个名为```panel```的包，存储我们所需要跳转的相关页面；还有一个```component```的包，存储为实现一些特定功能的而特别设计的组件。
 ![gui](/screenshot/gui.jpg)
-#### 业务逻辑层类
+
+### 业务逻辑层类
 业务逻辑层主要实现了网络编程的相关功能。```logic```包内只有一个文件```Configuration```，它提供地址服务器的地址和端口，用于客户端和服务器之间进行沟通。
-![logic](screenshot/logic.jpg)
-客户端只有相应的```Client```类，主要
+![logic](/screenshot/logic.jpg)
+#### 客户端
+客户端只有相应的```Client```类，主要作用为创建```socket```并进行相应的接收、处理、发送信息，与服务器进行交互，并根据服务器发来的信息调用```GUI```的方法，对```GUI```进行调整。
+![UMLClient]()
+#### 服务器端
+```server```包下有三个类：
+1. ```Server```类：用于运行服务器。新建客户端时，```Server```都新建一个线程```NotifyHandler```，用于监听客户端的信息。
+2. ```Message```类：主要用于信息传递。
+![Message](/screenshot/Message.jpg)
+比较特别是，```Message```类为了实现能够传递不同类型的信息。我们将其设计为泛型设计，并通过```Vector```实现能够传递任意数量的变量。例如，要进行注册的操作，我们只需将```T```设为```String```，将用户名和密码压入```Vector```中即可传给服务器进行处理。
+3. ```NotifyHandler```类：用于识别、响应处理客户端发来的请求。进行```UserDB```和```CourseDB```之间的交互。
+![NotifyHandler](/screenshot/NotifyHandler.jpg)
+
+## 知识点应用说明
+1. 面向对象编程知识点（必须涉及到）：
+    * 类和对象
+    * 超类与继承
+    * 接口及其实现
+    * 异常处理
+    * 多线程
+    * 文件存储
+    * 网络编程
+2. 扩展知识点（鼓励挑战）：
+    * Java 图形界面
+    * Java JDBC
+    * Java 设计模式
+    * 其它
