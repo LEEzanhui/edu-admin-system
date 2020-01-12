@@ -29,6 +29,7 @@ public class NotifyHandler extends Thread {
 	public void run() {
 		try {
 			in = socket.getInputStream();
+			System.out.println(socket);
 			ObjectInputStream ois = new ObjectInputStream(in);
 			while(true) {
 					Message<?> msg = (Message<?>) ois.readObject();
@@ -51,13 +52,13 @@ public class NotifyHandler extends Thread {
 
 		switch (msg.getOpcode()) {
 		case "login":
-			newMsg = login(msg);
+			newMsg = login((Message<String>)msg);
 			break;
 		case "exit":
 			exit(msg);
 			break;
 		case "regi":
-			newMsg = register((Message<User>)msg);
+			newMsg = register((Message<String>)msg);
 			break;
 		case "seacourseid":
 			newMsg = searchCourseById((Message<String>) msg);
@@ -91,7 +92,7 @@ public class NotifyHandler extends Thread {
 		return newMsg;
 	}
 
-	public Message<Integer> login(Message<?>msg) {
+	public Message<Integer> login(Message<String>msg) {
 		Message<Integer> newMsg = new Message<Integer>();
 		if (userDB.pwdMatched(msg.getId(), msg.getPassword()))
 		  newMsg.getVec().add(1);
@@ -102,12 +103,18 @@ public class NotifyHandler extends Thread {
 
 		return msg;
 	}
-	public Message<Integer> register(Message<User> msg) {
-		Map<String, User> newUser = new HashMap<String, User>();
+	public Message<Integer> register(Message<String> msg) {
+		Map<String, User> newUsers = new HashMap<String, User>();
 		String newId = userDB.getNewId();
-		newUser.put(newId, msg.getVec().firstElement());
+		String username = msg.getVec().get(1);
+		System.out.println(username);
+		String password = msg.getVec().get(2);
+		String other = "";
+		User newUser = new User(newId, password, username, other);
+		
+		newUsers.put(newId, newUser);
 		Message<Integer> newMsg = new Message<Integer>();
-		if (userDB.modify(newUser))
+		if (userDB.modify(newUsers))
 		  newMsg.getVec().add(1);
 		else newMsg.getVec().add(0);
 		return newMsg;

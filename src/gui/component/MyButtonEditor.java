@@ -76,7 +76,7 @@ public class MyButtonEditor extends DefaultCellEditor
 				out.add(getname);				//将课程名传走（暂定）
 				message.setVec(out);
 				//未完成，想法是将整个课程都传走，这样修改课程和选课可以共用这个函数，只要设置表格可否改动即可
-				Client.output(message);
+				Client.send(message);
             }
         });
  

@@ -11,32 +11,45 @@ public class Message <T> {
 	private String id;
 	private String password;
 
-	//Store various input information (such as the number of a series of courses)
+	//Store various input information
 	private Vector<T> vec;
 
 	public Message() {
 		vec = new Vector<T>();
 	}
+	public Message(String opcode, Vector<T> vec) {
+		this.opcode = opcode;
+		this.vec = vec;
+	}
 	public Message(String opcode, String id, String password) {
-		
+		this.opcode = opcode;
+		this.id = id;
+		this.password = password;
 		vec = new Vector<T>();
+	}
+	public Message(String opcode, String id, String password, Vector<T> vec) {
+		this.opcode = opcode;
+		this.id = id;
+		this.password = password;
+		this.vec = vec;
 	}
 
 	public String getOpcode() {
 		return opcode;
 	}
-	public String getId() {
-		return id;
-	}
-	public String getPassword() {
-		return password;
-	}
-
 	public void setOpcode(String opcode) {
 		this.opcode = opcode;
 	}
+	
+	public String getId() {
+		return id;
+	}
 	public void setId(String id) {
 		this.id = id;
+	}
+	
+	public String getPassword() {
+		return password;
 	}
 	public void setPassword(String password) {
 		this.password = password;

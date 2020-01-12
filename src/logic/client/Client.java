@@ -42,8 +42,9 @@ public class Client {
 		window.frame.setVisible(true);
 	}
 
-	public static void output(Message<?> message) {
+	public static void send(Message<?> message) {
 		try {
+			System.out.println("Client"+message.getVec());
 			OutputStream out = socket.getOutputStream();
 			ObjectOutputStream oos = new ObjectOutputStream(out);
 
