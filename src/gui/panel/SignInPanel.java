@@ -8,7 +8,7 @@ import gui.UIConst;
 import logic.server.Message;
 
 import java.awt.*;
-import java.net.Socket;
+import java.util.Vector;
 
 public class SignInPanel extends JPanel {
 
@@ -47,28 +47,35 @@ public class SignInPanel extends JPanel {
 		titlePanel.add(title);
 
 		JPanel contentPanel = new JPanel();
+//		contentPanel.setBackground(UIConst.BACKGROND);
 		contentPanel.setBackground(UIConst.MAIN_BACK_COLOR);
+		
 		GridBagLayout gbLayout = new GridBagLayout();
 		contentPanel.setLayout(gbLayout);
 
 		GridBagConstraints gbc = new GridBagConstraints();
 		gbc.fill = GridBagConstraints.BOTH;
-		gbc.insets = new Insets(10, 10, 10, 10);
-//		gbc.ipadx = 10;
-//		gbc.ipady = 10;
 		
-		JPanel introPanel = new JPanel();
-		JTextArea intro = new JTextArea("introasd\nsadsadsdsadsad....");
-//		intro.setEditable(false);
-		introPanel.add(intro);
+		JTextArea intro = new JTextArea(
+				"本教务系统可以帮助你快速查询学校开设课程。。。\n"
+				+ "\n"
+				+ "请使用id进行登录。\n"
+				+ "如果你是新用户，\n"
+				+ "请直接填写用户名注册。");
+		intro.setFont(UIConst.INTRO_FONT);
+		intro.setEditable(false);
+		intro.setLineWrap(true);
+		intro.setOpaque(true);
+		intro.setBackground(UIConst.INTRO_BACKGROND);
+		gbc.insets = new Insets(10, 10, 10, 10);
 		gbc.gridheight = 5;
 		gbc.gridwidth = 1;
 		gbc.gridx = 0;
 		gbc.gridy = 0;
 		gbc.weightx = 0.5;
 		gbc.weighty = 1;
-		gbLayout.setConstraints(introPanel, gbc);
-		contentPanel.add(introPanel);
+		gbLayout.setConstraints(intro, gbc);
+		contentPanel.add(intro);
 
 		picture = new JLabel();
 		ImageIcon university = UIConst.UNIVERSITY;
@@ -78,6 +85,8 @@ public class SignInPanel extends JPanel {
 					picWidth*university.getIconHeight()/university.getIconWidth(),
 					Image.SCALE_DEFAULT));
 		picture.setIcon(university);
+//		gbc.insets = new Insets(10, 10, 80, 80);
+		gbc.ipadx = 85;
 		gbc.gridheight = 1;
 		gbc.gridwidth = 5;
 		gbc.gridx = 1;
@@ -87,19 +96,22 @@ public class SignInPanel extends JPanel {
 		gbLayout.setConstraints(picture, gbc);
 		contentPanel.add(picture);
 
-		usernLabel = new JLabel("username", null, JLabel.CENTER);
+		usernLabel = new JLabel("username / id", null, JLabel.CENTER);
 		gbc.gridwidth = 1;
 		gbc.gridy = 1;
 		gbc.weightx = 0.1;
 		gbc.weighty = 0.2;
+		gbc.insets = new Insets(10, 10, 10, 10);
 		gbLayout.setConstraints(usernLabel, gbc);
 		contentPanel.add(usernLabel);
 
 		username = new JTextField(40);
-		username.setPreferredSize(new Dimension(100, 40));
+//		gbc.ipadx = 10;
+//		gbc.ipady = 10;
 		gbc.gridx = 2;
 		gbc.gridwidth = 4;
 		gbc.weightx = 0.4;
+		gbc.insets = new Insets(30, 30, 10, 10);
 		gbLayout.setConstraints(username, gbc);
 		contentPanel.add(username);
 
@@ -108,29 +120,29 @@ public class SignInPanel extends JPanel {
 		gbc.gridx = 1;
 		gbc.gridy = 2;
 		gbc.weightx = 0.1;
+		gbc.insets = new Insets(10, 10, 10, 10);
 		gbLayout.setConstraints(pwdLabel, gbc);
 		contentPanel.add(pwdLabel);
 
 		password = new JTextField(40);
-		password.setPreferredSize(new Dimension(100, 40));
 		gbc.gridwidth = 4;
 		gbc.gridx = 2;
 		gbc.weightx = 0.4;
+		gbc.insets = new Insets(30, 30, 10, 10);
 		gbLayout.setConstraints(password, gbc);
 		contentPanel.add(password);
 
-		signupBtn = new JButton("Sign ip");
-		signupBtn.setPreferredSize(new Dimension(200, 40));
+		signupBtn = new JButton("Sign up");
 		gbc.gridwidth = 2;
 		gbc.gridx = 2;
 		gbc.gridy = 3;
 		gbc.weightx = 0.2;
 		gbc.weighty = 0.1;
+		gbc.insets = new Insets(10, 10, 10, 10);
 		gbLayout.setConstraints(signupBtn, gbc);
 		contentPanel.add(signupBtn);
 		
 		signinBtn = new JButton("Sign in");
-		signinBtn.setPreferredSize(new Dimension(200, 40));
 		gbc.gridwidth = 2;
 		gbc.gridx = 4;
 		gbc.weightx = 0.2;
@@ -144,20 +156,25 @@ public class SignInPanel extends JPanel {
 
 	public void addListener() {
 		signupBtn.addActionListener(e -> {
-			Message<Integer> message = new Message<Integer>();		//type doesn't matter, right?
-
-//				could we check the format here?
-
-			message.setOpcode("reg");
-			message.setId(username.getText());			//这里改改、将用户、密码发过去
-			message.setPassword(password.getText());
-//			Client.output(message);						//实际运行时启用
+			Vector<String> vec = new Vector<String>();
+			vec.add(username.getText());
+			vec.add(password.getText());
+			System.out.println("loginPanel: "+vec);
+			Message<String> message = new Message<String>("regi", vec);
+			Client.send(message);
 
 			window.toolBarPanel.buttonStatus.setEnabled(true);		//用于测试，实际运行时删除（点击后启用侧边栏按钮）
 			window.toolBarPanel.buttonTimetable.setEnabled(true);//用于测试，实际运行时删除
 			window.mainPanel.removeAll();//用于测试，实际运行时删除
 			window.mainPanel.add(window.infoPanel, BorderLayout.CENTER);//用于测试，实际运行时删除
 			window.mainPanel.updateUI();//用于测试，实际运行时删除
+		});
+		
+		signinBtn.addActionListener(e -> {
+			Message<String> message = new Message<String>(
+					"login", username.getText(), password.getText());
+			System.out.println("signinPanel: "+message.getId()+" "+message.getPassword());
+			Client.send(message);
 		});
 	}
 }

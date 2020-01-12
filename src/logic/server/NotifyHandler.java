@@ -5,6 +5,7 @@ import java.io.InputStream;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.io.OutputStream;
+import java.io.Serializable;
 import java.net.Socket;
 import java.util.HashMap;
 import java.util.Map;
@@ -14,6 +15,7 @@ import java.util.Vector;
 import data.*;
 
 public class NotifyHandler extends Thread {
+
 	private Socket socket = null;
 	private InputStream in = null;
 	private CourseDB courseDB;
