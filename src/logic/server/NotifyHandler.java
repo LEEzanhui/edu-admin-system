@@ -107,18 +107,19 @@ public class NotifyHandler extends Thread {
 		return newMsg;
 	}
 
-	public Message<Integer> login(Message<String>msg) {
-		Message<Integer> newMsg = new Message<Integer>();
+	public Message<User> login(Message<String>msg) {
+		Message<User> newMsg = new Message<User>();
 		if (userDB.pwdMatched(msg.getId(), msg.getPassword())) {
-			newMsg.getVec().add(1);
-		} else newMsg.getVec().add(0);
+			User user = userDB.searchById(msg.getId()).firstElement();
+			newMsg.getVec().add(user);
+		} else newMsg.getVec().clear();
 		return newMsg;
 	}
 	public Message<?> exit(Message<?> msg) {
 
 		return msg;
 	}
-	public Message<Integer> register(Message<String> msg) {
+	public Message<User> register(Message<String> msg) {
 		Map<String, User> newUsers = new HashMap<String, User>();
 		String newId = userDB.getNewId();
 		String username = msg.getVec().get(0);
@@ -128,10 +129,10 @@ public class NotifyHandler extends Thread {
 		User newUser = new User(newId, password, username, other);
 		
 		newUsers.put(newId, newUser);
-		Message<Integer> newMsg = new Message<Integer>();
+		Message<User> newMsg = new Message<User>();
 		if (userDB.modify(newUsers))
-		  newMsg.getVec().add(1);
-		else newMsg.getVec().add(0);
+		  newMsg.getVec().add(newUser);
+		else newMsg.getVec().clear();;
 		return newMsg;
 	}
 	public Message<Course> searchCourseById(Message<String> msg) {

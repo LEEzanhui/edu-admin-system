@@ -33,17 +33,29 @@ public class User implements Serializable {
 	public String id() {
 		return id;
 	}
+	public void setId(String id) {
+		this.id = id;
+	}
 	public String password() {
 		return password;
 	}
+	public void setPassword(String password) {
+		this.password = password;
+	}
 	public String name() {
 		return name;
+	}
+	public void setName(String name) {
+		this.name = name;
 	}
 	public Vector<Authority> authority() {
 		return authority;
 	}
 	public String other() {
 		return other;
+	}
+	public void setOther(String other) {
+		this.other = other;
 	}
 	public Vector<String> courses() {
 		return courses;

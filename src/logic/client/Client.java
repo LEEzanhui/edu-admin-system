@@ -99,8 +99,9 @@ public class Client implements java.io.Serializable{
 	public void handleInput(Message<?> msg) {
 		switch (msg.getOpcode()) {
 		case "regi": case "login": 
-			Vector<Integer> vec = (Vector<Integer>) msg.getVec();
-			if(vec.firstElement() == 1) {
+			Vector<User> vec = (Vector<User>) msg.getVec();
+			if(vec.size() > 0) {
+				window.infoPanel.setInfo(vec.firstElement());
 				window.toolBarPanel.buttonStatus.setEnabled(true);		//用于启用其它功能
 				window.toolBarPanel.buttonTimetable.setEnabled(true);//用于启用其它功能
 				window.toolBarPanel.buttonSetting.setEnabled(true);
