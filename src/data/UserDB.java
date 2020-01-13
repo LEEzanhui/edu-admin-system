@@ -147,7 +147,7 @@ public class UserDB {
 			if (maxId.compareTo(id) < 0)
 			  maxId = id;
 		}
-		String newId = String.valueOf(Integer.parseInt(maxId)+1);
+		String newId = String.format("%08d", Integer.parseInt(maxId)+1);
 		return newId;
 	}
 
@@ -161,23 +161,9 @@ public class UserDB {
 //		}
 //	}
 //
-//	public static void main(String[] args) {
-//		UserDB userDB = new UserDB();
-//		userDB.print();
-//		System.out.println();
-//		Map<String, User> newUsers = new HashMap<String, User>();
-//		newUsers.put("1234", new User("1234", "name", new Vector<Authority>(), "other"));
-//		userDB.modify(newUsers);
-//		userDB.print();
-//		System.out.println();
-//		userDB.writeBack();
-//		userDB.users.put("1235", new User());
-//		userDB.print();
-//		System.out.println("----\n"+userDB.search("123"));
-//		Vector<String> delUsers = new Vector<String>();
-//		delUsers.add("1235");
-//		userDB.delete(delUsers);
-//		System.out.println("----\n"+userDB.search("123"));
-//		userDB.writeBack();
-//	}
+	public static void main(String[] args) {
+		UserDB userDB = new UserDB();
+		String newId = userDB.getNewId();
+		System.out.println(newId);
+	}
 }
