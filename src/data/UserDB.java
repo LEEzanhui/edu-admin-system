@@ -141,8 +141,8 @@ public class UserDB {
 
 	public String getNewId() {
 		if (users.keySet().isEmpty())
-		  return new String("0000001");
-		String maxId = "0000000";
+		  return new String("00000001");
+		String maxId = "00000000";
 		for (String id : users.keySet()) {
 			if (maxId.compareTo(id) < 0)
 			  maxId = id;

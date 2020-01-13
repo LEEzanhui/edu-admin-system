@@ -1,6 +1,8 @@
 package logic.server;
 
 import java.awt.BorderLayout;
+import java.awt.event.WindowAdapter;
+import java.awt.event.WindowEvent;
 import java.io.IOException;
 import java.io.ObjectOutputStream;
 import java.net.ServerSocket;
@@ -37,18 +39,26 @@ public class Server {
 		serverFrame.setResizable(false);
         serverFrame.setBackground(UIConst.MAIN_BACK_COLOR);
 		serverFrame.setVisible(true);
-		serverFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		
-		JPanel serverPanel = new JPanel(true);
-		serverPanel.setLayout(new BorderLayout());
-		
-		JButton closeButton = new JButton("close server");
-		serverPanel.add(closeButton, BorderLayout.CENTER);
-		serverFrame.add(serverPanel);
-		closeButton.addActionListener(e -> {
-			courseDataBase.writeBack();
-			userDataBase.writeBack();
+		serverFrame.addWindowListener(new WindowAdapter() {
+			@Override
+			public void windowClosing(WindowEvent e) {
+				courseDataBase.writeBack();
+				userDataBase.writeBack();
+				System.exit(0);
+			}
 		});
+		
+//		serverFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+//		JPanel serverPanel = new JPanel(true);
+//		serverPanel.setLayout(new BorderLayout());
+//		
+//		JButton closeButton = new JButton("close server");
+//		serverPanel.add(closeButton, BorderLayout.CENTER);
+//		serverFrame.add(serverPanel);
+//		closeButton.addActionListener(e -> {
+//			courseDataBase.writeBack();
+//			userDataBase.writeBack();
+//		});
 		
 		try {
 			server = new ServerSocket(Configuration.port);
