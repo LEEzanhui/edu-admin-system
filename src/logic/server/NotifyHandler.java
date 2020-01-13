@@ -99,8 +99,8 @@ public class NotifyHandler extends Thread {
 //			newMsg = choose((Message<String>) msg);
 			newMsg = (Message<String>) msg;
 			break;
-		case "showcouese":
-//			newMsg = (Message<?>) 
+		case "showcourse":
+			newMsg = searchCourseById((Message<String>) msg); 
 			break;
 		default:
 			other();

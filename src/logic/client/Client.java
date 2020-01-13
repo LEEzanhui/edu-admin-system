@@ -132,6 +132,15 @@ public class Client implements java.io.Serializable{
 				window.ssPanel.tableModel.setValueAt(vec11.get(i).name(), i, 1);
 				window.ssPanel.tableModel.setValueAt(vec11.get(i).other(), i, 2);
 			}
+		case "showcourse":
+			Vector<Course> vec2 = (Vector<Course>)msg.getVec();
+
+			for(int i=0; i<vec2.size(); i++) {
+				window.infoPanel.tableModel.setValueAt(vec2.get(i).courseId(), i, 0);
+				window.infoPanel.tableModel.setValueAt(vec2.get(i).name(), i, 1);
+				window.infoPanel.tableModel.setValueAt(vec2.get(i).teacherId(), i, 2);
+				window.infoPanel.tableModel.setValueAt(vec2.get(i).other(), i, 3);
+			}
 		default:
 			break;
 		}

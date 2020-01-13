@@ -79,31 +79,40 @@ public class SelectCoursePanel extends JPanel {
 		panel.setBackground(UIConst.MAIN_BACK_COLOR);
 		GridBagConstraints c = new GridBagConstraints();
 		
-//		c.gridheight = 1;
-//		c.gridwidth = 1;
+		c.gridheight = 1;
+		c.gridwidth = 1;
+		c.gridx = 0;
 		c.gridy = 0;
+//		c.weightx = 0.6;
 		filterText = new JTextField(13);
 		gridbag.setConstraints(filterText, c);
 		panel.add(filterText);
-		c.gridy = 1;
+		c.gridx = 1;
+		c.gridy = 0;
+//		c.weightx = 0.2;
 		search = new JButton("search");
 		gridbag.setConstraints(search, c);
 		panel.add(search);
-		c.gridy = 2;
+		c.gridx = 2;
+		c.gridy = 0;
+//		c.weightx = 0.2;
 		update = new JButton("刷新");
 		gridbag.setConstraints(update, c);
 		panel.add(update);
 		
-		c.gridy = 3;
+		c.gridwidth = 3;
+		c.gridx = 0;
+		c.gridy = 1;
+		c.weightx = 1;
 		sorter = new TableRowSorter<TableModel>(tableModel);
 		table.setRowSorter(sorter);
-		JScrollPane scrollPane = new JScrollPane(table);		//JTable
+		JScrollPane scrollPane = new JScrollPane(table);	//JTable
+		scrollPane.setBackground(UIConst.MAIN_BACK_COLOR);
 		gridbag.setConstraints(scrollPane, c);
 		panel.add(scrollPane);
 		
-		contentPanel.add(panel, BorderLayout.CENTER);
-		
-		this.add(contentPanel, BorderLayout.CENTER);
+		this.add(titlePanel, BorderLayout.NORTH);
+		this.add(panel, BorderLayout.CENTER);
 	}
 	
 	public static void setContent() {

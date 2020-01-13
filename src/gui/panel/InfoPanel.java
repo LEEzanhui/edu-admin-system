@@ -4,10 +4,14 @@ import java.awt.*;
 import java.util.Vector;
 
 import javax.swing.*;
+import javax.swing.table.DefaultTableModel;
+import javax.swing.table.TableModel;
 
 import data.User;
 import gui.GUI;
 import gui.UIConst;
+import gui.component.MyButtonEditor;
+import gui.component.MyButtonRender;
 import logic.client.Client;
 import logic.server.Message;
 
@@ -26,6 +30,17 @@ public class InfoPanel extends JPanel{
 	private JButton editBtn;
 	private JButton saveBtn;
 	private JButton courseBtn;
+	
+	public JTable table;
+	private String column_names[]= {"id","name","teacher","other"};	//table header
+	
+	public TableModel tableModel = new DefaultTableModel(column_names, 8) {
+		public boolean isCellEditable(int rowIndex,int columnIndex) {
+//			if(columnIndex!=4) return false;//这个是可以编辑的列
+			//if(rowIndex!=0) return false;
+			return true;
+		}
+	};
 
 	public InfoPanel(GUI window) {
 		super();
@@ -52,11 +67,11 @@ public class InfoPanel extends JPanel{
 		
 		JPanel contentPanel = new JPanel();
 		this.add(contentPanel, BorderLayout.CENTER);
-//		contentPanel.setLayout(
-//				new FlowLayout(FlowLayout.LEFT, 20, 40));
-		contentPanel.setLayout(new GridBagLayout());
-		GridBagConstraints gbc = new GridBagConstraints();
-		gbc.fill = GridBagConstraints.BOTH;
+		contentPanel.setLayout(
+				new FlowLayout(FlowLayout.LEFT, 20, 40));
+//		contentPanel.setLayout(new GridBagLayout());
+//		GridBagConstraints gbc = new GridBagConstraints();
+//		gbc.fill = GridBagConstraints.BOTH;
 		
 		contentPanel.setBackground(UIConst.MAIN_BACK_COLOR);
 		
@@ -101,6 +116,19 @@ public class InfoPanel extends JPanel{
 		
 		courseBtn = new JButton("Selected Course");
 		contentPanel.add(courseBtn);
+		
+		table = new JTable();
+        table.getTableHeader().setBackground(Color.WHITE);
+        table.getTableHeader().setForeground(UIConst.TOOL_BAR_BACK_COLOR);
+        
+		table.setModel(tableModel);
+//		table.setEnabled(false);
+		table.setRowHeight(18);// 设置表格行宽
+		table.getColumnModel().getColumn(0).setPreferredWidth(50);	//设置列宽
+		table.getTableHeader().setReorderingAllowed(false);		//不让JTABLE中的列任意换位置
+		JScrollPane scrollPane = new JScrollPane(table);
+		scrollPane.setBackground(UIConst.MAIN_BACK_COLOR);
+		contentPanel.add(scrollPane);
 	}
 	
 	private void addListener() {

@@ -72,24 +72,33 @@ public class searchStuPanel extends JPanel{
 		panel.setLayout(gridbag);
 		panel.setBackground(UIConst.MAIN_BACK_COLOR);
 		GridBagConstraints c = new GridBagConstraints();
-		
-//		c.gridheight = 1;
-//		c.gridwidth = 1;
+//		c.fill = GridBagConstraints.BOTH;
+		c.gridheight = 1;
+		c.gridwidth = 1;
+//		c.gridx = 0;
 		c.gridy = 0;
-		filterText = new JTextField(13);
+//		c.weightx = 0.6;
+		filterText = new JTextField(30);
 		gridbag.setConstraints(filterText, c);
 		panel.add(filterText);
-		c.gridy = 1;
+//		c.gridx = 1;
+		c.gridy = 0;
+//		c.weightx = 0.2;
 		search = new JButton("searchById");
 		gridbag.setConstraints(search, c);
 		panel.add(search);
 		
+//		c.gridx = 2;
 		searchname = new JButton("searchByName");
 		gridbag.setConstraints(searchname, c);
 		panel.add(searchname);
 		
-		c.gridy = 3;
+		c.gridwidth = 3;
+		c.gridx = 0;
+		c.gridy = 1;
+		c.weightx = 1;
 		JScrollPane scrollPane = new JScrollPane(table);		//JTable
+		scrollPane.setBackground(UIConst.MAIN_BACK_COLOR);
 		gridbag.setConstraints(scrollPane, c);
 		panel.add(scrollPane);
 		
