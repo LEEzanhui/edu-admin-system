@@ -1,8 +1,6 @@
 package gui.panel;
 
-import java.awt.BorderLayout;
-import java.awt.Dimension;
-import java.awt.FlowLayout;
+import java.awt.*;
 import java.util.Vector;
 
 import javax.swing.*;
@@ -40,8 +38,8 @@ public class InfoPanel extends JPanel{
 				UIConst.MAIN_WINDOW_WIDTH - ToolBarPanel.WIDTH,
 				UIConst.MAIN_WINDOW_HEIGHT);
 		this.setPreferredSize(preferredSize);
-		this.setBackground(UIConst.MAIN_BACK_COLOR);
 		this.setLayout(new BorderLayout());
+		this.setBackground(UIConst.MAIN_BACK_COLOR);
 
 		JPanel titlePanel = new JPanel();
 		title = new JLabel("个人信息");
@@ -54,10 +52,15 @@ public class InfoPanel extends JPanel{
 		
 		JPanel contentPanel = new JPanel();
 		this.add(contentPanel, BorderLayout.CENTER);
-		contentPanel.setLayout(
-				new FlowLayout(FlowLayout.LEFT, 20, 40));
+//		contentPanel.setLayout(
+//				new FlowLayout(FlowLayout.LEFT, 20, 40));
+		contentPanel.setLayout(new GridBagLayout());
+		GridBagConstraints gbc = new GridBagConstraints();
+		gbc.fill = GridBagConstraints.BOTH;
 		
-		idLabel = new JLabel("userid");
+		contentPanel.setBackground(UIConst.MAIN_BACK_COLOR);
+		
+		idLabel = new JLabel("user id: ");
 		contentPanel.add(idLabel);
 		
 		id = new JTextField();
@@ -65,7 +68,7 @@ public class InfoPanel extends JPanel{
 		id.setEditable(false);
 		contentPanel.add(id);
 		
-		usernLabel = new JLabel("username");
+		usernLabel = new JLabel("username: ");
 		contentPanel.add(usernLabel);
 		
 		username = new JTextField();
@@ -73,7 +76,7 @@ public class InfoPanel extends JPanel{
 		username.setEditable(false);
 		contentPanel.add(username);
 		
-		pwdLabel = new JLabel("password");
+		pwdLabel = new JLabel("password: ");
 		contentPanel.add(pwdLabel);
 		
 		password = new JTextField();
@@ -81,7 +84,7 @@ public class InfoPanel extends JPanel{
 		password.setEditable(false);
 		contentPanel.add(password);
 		
-		othLabel = new JLabel("remark");
+		othLabel = new JLabel("remark: ");
 		contentPanel.add(othLabel);
 		
 		other = new JTextField();
