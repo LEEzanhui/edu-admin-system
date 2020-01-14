@@ -57,7 +57,9 @@ public class SignInPanel extends JPanel {
 		gbc.fill = GridBagConstraints.BOTH;
 
 		JTextArea intro = new JTextArea(
-				"本教务系统可以帮助你快速查询学校开设课程。。。\n"
+				"\n\n\n\n\n"
+				+ "本教务系统旨在帮助学生更方便地管理信息，\n"
+				+ "可以帮助你快速查询学校开设课程、并且查询自己地已选课程。\n"
 				+ "\n"
 				+ "请使用id进行登录。\n"
 				+ "如果你是新用户，\n"
@@ -167,11 +169,6 @@ public class SignInPanel extends JPanel {
 			Message<String> message = new Message<String>("regi", vec);
 			Client.send(message);
 
-//			window.toolBarPanel.buttonStatus.setEnabled(true);		//用于测试，实际运行时删除（点击后启用侧边栏按钮）
-//			window.toolBarPanel.buttonTimetable.setEnabled(true);//用于测试，实际运行时删除
-//			window.mainPanel.removeAll();//用于测试，实际运行时删除
-//			window.mainPanel.add(window.infoPanel, BorderLayout.CENTER);//用于测试，实际运行时删除
-//			window.mainPanel.updateUI();//用于测试，实际运行时删除
 		});
 
 		signinBtn.addActionListener(e -> {

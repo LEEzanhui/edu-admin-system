@@ -122,7 +122,7 @@ public class InfoPanel extends JPanel{
         table.getTableHeader().setForeground(UIConst.TOOL_BAR_BACK_COLOR);
         
 		table.setModel(tableModel);
-//		table.setEnabled(false);
+		table.setEnabled(false);
 		table.setRowHeight(36);// 设置表格行宽
 		table.getColumnModel().getColumn(0).setPreferredWidth(50);	//设置列宽
 		table.getTableHeader().setReorderingAllowed(false);		//不让JTABLE中的列任意换位置
