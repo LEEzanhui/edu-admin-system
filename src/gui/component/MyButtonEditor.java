@@ -56,7 +56,7 @@ public class MyButtonEditor extends DefaultCellEditor
         this.button = new JButton("已发送");
  
         // 设置按钮的大小及位置。
-        this.button.setBounds(0, 0, 100, 15);
+        this.button.setBounds(0, 0, 130, 36);
  
         // 为按钮添加事件。这里只能添加ActionListner事件，Mouse事件无效。
         this.button.addActionListener(new ActionListener()

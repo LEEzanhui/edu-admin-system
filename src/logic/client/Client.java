@@ -2,6 +2,8 @@ package logic.client;
 
 import java.awt.BorderLayout;
 import java.awt.EventQueue;
+import java.awt.FlowLayout;
+import java.awt.Font;
 import java.io.BufferedReader;
 import java.io.InputStream;
 import java.io.InputStreamReader;
@@ -12,12 +14,17 @@ import java.net.InetAddress;
 import java.net.Socket;
 import java.util.Vector;
 
+import javax.swing.JFrame;
+import javax.swing.JLabel;
+import javax.swing.JPanel;
+import javax.swing.JTextField;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableModel;
 
 import data.Course;
 import data.User;
 import gui.GUI;
+import gui.UIConst;
 import gui.component.MyButtonEditor;
 import gui.component.MyButtonRender;
 import logic.Configuration;
@@ -109,6 +116,20 @@ public class Client implements java.io.Serializable{
 				window.mainPanel.add(window.infoPanel, BorderLayout.CENTER);
 				window.mainPanel.updateUI();
 			}
+			else {
+				JFrame alert = new JFrame();
+				alert.setTitle("＞﹏＜");
+				alert.setBounds(100, 100, 450, 100);
+				alert.setResizable(false);
+				JPanel panel = new JPanel(true);
+				panel.setBackground(UIConst.MAIN_BACK_COLOR);
+				panel.setLayout(new FlowLayout(FlowLayout.CENTER));
+				JLabel label = new JLabel("用户名不存在或密码错误");
+				label.setFont(new Font("宋体", Font.BOLD, 30));
+				panel.add(label);
+				alert.add(panel);
+				alert.setVisible(true);
+			}
 			break;
 		case "seacourseid":
 			Vector<Course> vec1 = (Vector<Course>)msg.getVec();
@@ -119,6 +140,7 @@ public class Client implements java.io.Serializable{
 				window.scPanel.tableModel.setValueAt(vec1.get(i).teacherId(), i, 2);
 				window.scPanel.tableModel.setValueAt(vec1.get(i).other(), i, 3);
 			}
+			break;
 		case "seauserid":case "seausername":
 			Vector<User> vec11 = (Vector<User>)msg.getVec();
 //			System.out.println(vec11.size());
@@ -132,6 +154,7 @@ public class Client implements java.io.Serializable{
 				window.ssPanel.tableModel.setValueAt(vec11.get(i).name(), i, 1);
 				window.ssPanel.tableModel.setValueAt(vec11.get(i).other(), i, 2);
 			}
+			break;
 		case "showcourse":
 			Vector<Course> vec2 = (Vector<Course>)msg.getVec();
 
@@ -141,6 +164,7 @@ public class Client implements java.io.Serializable{
 				window.infoPanel.tableModel.setValueAt(vec2.get(i).teacherId(), i, 2);
 				window.infoPanel.tableModel.setValueAt(vec2.get(i).other(), i, 3);
 			}
+			break;
 		default:
 			break;
 		}

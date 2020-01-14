@@ -44,7 +44,7 @@ public class SelectCoursePanel extends JPanel {
 	
 	public void initial() {
 		JPanel titlePanel = new JPanel();
-		title = new JLabel("selectCourse");
+		title = new JLabel("选课");
 		titlePanel.setLayout(new FlowLayout(FlowLayout.LEFT));
 		title.setForeground(UIConst.TOOL_BAR_BACK_COLOR);
 		title.setFont(UIConst.TITLE_FONT);
@@ -61,7 +61,7 @@ public class SelectCoursePanel extends JPanel {
 //		table.setEnabled(false);
 		table.getColumnModel().getColumn(4).setCellRenderer(new MyButtonRender());	//button in table第几列
 		table.getColumnModel().getColumn(4).setCellEditor(new MyButtonEditor(table));	//我尝试在这里面实现按钮事件监听
-		table.setRowHeight(18);// 设置表格行宽
+		table.setRowHeight(36);// 设置表格行宽
 		table.getColumnModel().getColumn(0).setPreferredWidth(50);	//设置列宽
 		table.getTableHeader().setReorderingAllowed(false);		//不让JTABLE中的列任意换位置
 		
@@ -70,45 +70,35 @@ public class SelectCoursePanel extends JPanel {
         this.setMaximumSize(preferredSize);
         this.setMinimumSize(preferredSize);
 
-        this.setLayout(new BorderLayout());        
+        this.setLayout(new BorderLayout());    
         
 		JPanel panel = new JPanel();
 		
-		GridBagLayout gridbag = new GridBagLayout();
-		panel.setLayout(gridbag);
+		panel.setLayout(new FlowLayout(FlowLayout.CENTER, 20, 40));
 		panel.setBackground(UIConst.MAIN_BACK_COLOR);
-		GridBagConstraints c = new GridBagConstraints();
-		
-		c.gridheight = 1;
-		c.gridwidth = 1;
-		c.gridx = 0;
-		c.gridy = 0;
-//		c.weightx = 0.6;
-		filterText = new JTextField(13);
-		gridbag.setConstraints(filterText, c);
+
+		filterText = new JTextField();
+		filterText.setPreferredSize(new Dimension(320, 25));
+		filterText.setFont(new Font("宋体", Font.PLAIN, 22));
+
 		panel.add(filterText);
-		c.gridx = 1;
-		c.gridy = 0;
-//		c.weightx = 0.2;
-		search = new JButton("search");
-		gridbag.setConstraints(search, c);
+
+		search = new JButton("模糊查找");
+
 		panel.add(search);
-		c.gridx = 2;
-		c.gridy = 0;
-//		c.weightx = 0.2;
+
 		update = new JButton("刷新");
-		gridbag.setConstraints(update, c);
+
 		panel.add(update);
 		
-		c.gridwidth = 3;
-		c.gridx = 0;
-		c.gridy = 1;
-		c.weightx = 1;
 		sorter = new TableRowSorter<TableModel>(tableModel);
 		table.setRowSorter(sorter);
+		table.setFont(new Font("宋体", Font.PLAIN, 20));
+		table.setPreferredSize(new Dimension(600, 380));
 		JScrollPane scrollPane = new JScrollPane(table);	//JTable
 		scrollPane.setBackground(UIConst.MAIN_BACK_COLOR);
-		gridbag.setConstraints(scrollPane, c);
+
+		scrollPane.setPreferredSize(new Dimension(550, 400));
 		panel.add(scrollPane);
 		
 		this.add(titlePanel, BorderLayout.NORTH);

@@ -44,7 +44,7 @@ public class ToolBarPanel extends JPanel {
 
 		buttonStatus = new IconButton(UIConst.ICON_STATUS, UIConst.ICON_STATUS_ENABLE, UIConst.ICON_STATUS_DISABLE, "info");
 		buttonTimetable = new IconButton(UIConst.ICON_SCHEDULE, UIConst.ICON_SCHEDULE_ENABLE, UIConst.ICON_SCHEDULE, "selectCourse");
-		buttonSetting = new IconButton(UIConst.ICON_ABOUT, UIConst.ICON_SETTING_ENABLE, UIConst.ICON_ABOUT, "searchUser");
+		buttonSetting = new IconButton(UIConst.ICON_ABOUT, UIConst.ICON_ABOUT_ENABLE, UIConst.ICON_ABOUT, "searchUser");
 
 		panelU.add(buttonStatus);
 		panelU.add(buttonSetting);

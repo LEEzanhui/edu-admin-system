@@ -107,6 +107,7 @@ public class SignInPanel extends JPanel {
 		gbLayout.setConstraints(usernLabel, gbc);
 
 		username = new JTextField(40);
+		username.setFont(new Font("宋体", Font.PLAIN, 22));
 //		gbc.ipadx = 10;
 //		gbc.ipady = 10;
 		gbc.gridx = 2;
@@ -127,6 +128,7 @@ public class SignInPanel extends JPanel {
 		contentPanel.add(pwdLabel);
 
 		password = new JTextField(40);
+		password.setFont(new Font("宋体", Font.PLAIN, 22));
 		gbc.gridwidth = 4;
 		gbc.gridx = 2;
 		gbc.weightx = 0.4;

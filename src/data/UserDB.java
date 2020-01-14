@@ -136,7 +136,10 @@ public class UserDB {
 	}
 
 	public boolean pwdMatched(String id, String inputPwd) {
-		return users.get(id).password().equals(inputPwd);
+		if(users.containsKey(id))
+			return users.get(id).password().equals(inputPwd);
+		else
+			return false;
 	}
 
 	public String getNewId() {

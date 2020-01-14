@@ -55,6 +55,7 @@ public class UIConst {
 	public final static ImageIcon ICON_SCHEDULE_ENABLE = new ImageIcon("resource//icon//scheduleEnable.png");	
 	
 	public final static ImageIcon ICON_ABOUT = new ImageIcon("resource//icon//about.png");
+	public final static ImageIcon ICON_ABOUT_ENABLE = new ImageIcon("resource//icon//aboutEnable.png");
 	
 	public final static ImageIcon ICON_UPDATE = new ImageIcon("resource//icon//update.png");
 	

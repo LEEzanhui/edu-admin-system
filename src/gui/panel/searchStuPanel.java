@@ -4,6 +4,7 @@ import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.FlowLayout;
+import java.awt.Font;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 import java.awt.GridLayout;
@@ -43,7 +44,7 @@ public class searchStuPanel extends JPanel{
 	
 	public void initial() {
 		JPanel titlePanel = new JPanel();
-		title = new JLabel("searchUser");
+		title = new JLabel("用户查询");
 		titlePanel.setLayout(new FlowLayout(FlowLayout.LEFT));
 		title.setForeground(UIConst.TOOL_BAR_BACK_COLOR);
 		title.setFont(UIConst.TITLE_FONT);
@@ -55,10 +56,12 @@ public class searchStuPanel extends JPanel{
         
 		table.setModel(tableModel);
 //		table.setEnabled(false);
-		table.setRowHeight(18);// 设置表格行宽
+		table.setRowHeight(36);// 设置表格行宽
 		table.getColumnModel().getColumn(0).setPreferredWidth(50);	//设置列宽
 		table.getTableHeader().setReorderingAllowed(false);		//不让JTABLE中的列任意换位置
-	
+		table.setFont(new Font("宋体", Font.PLAIN, 20));
+		table.setPreferredSize(new Dimension(600, 380));
+		
         Dimension preferredSize = new Dimension(UIConst.MAIN_WINDOW_WIDTH-ToolBarPanel.WIDTH, UIConst.MAIN_WINDOW_HEIGHT);
         this.setPreferredSize(preferredSize);
         this.setMaximumSize(preferredSize);
@@ -68,38 +71,27 @@ public class searchStuPanel extends JPanel{
         
 		JPanel panel = new JPanel();
 		
-		GridBagLayout gridbag = new GridBagLayout();
-		panel.setLayout(gridbag);
+		panel.setLayout(new FlowLayout(FlowLayout.CENTER, 20, 40));
 		panel.setBackground(UIConst.MAIN_BACK_COLOR);
-		GridBagConstraints c = new GridBagConstraints();
-//		c.fill = GridBagConstraints.BOTH;
-		c.gridheight = 1;
-		c.gridwidth = 1;
-//		c.gridx = 0;
-		c.gridy = 0;
-//		c.weightx = 0.6;
-		filterText = new JTextField(30);
-		gridbag.setConstraints(filterText, c);
+		filterText = new JTextField();
+		filterText.setPreferredSize(new Dimension(320, 25));
+		filterText.setFont(new Font("宋体", Font.PLAIN, 22));
+
 		panel.add(filterText);
-//		c.gridx = 1;
-		c.gridy = 0;
-//		c.weightx = 0.2;
-		search = new JButton("searchById");
-		gridbag.setConstraints(search, c);
+
+		search = new JButton("ID查询");
+
 		panel.add(search);
 		
-//		c.gridx = 2;
-		searchname = new JButton("searchByName");
-		gridbag.setConstraints(searchname, c);
+
+		searchname = new JButton("名字查询");
+
 		panel.add(searchname);
 		
-		c.gridwidth = 3;
-		c.gridx = 0;
-		c.gridy = 1;
-		c.weightx = 1;
-		JScrollPane scrollPane = new JScrollPane(table);		//JTable
+		JScrollPane scrollPane = new JScrollPane(table);
+		scrollPane.setPreferredSize(new Dimension(550, 400));//JTable
 		scrollPane.setBackground(UIConst.MAIN_BACK_COLOR);
-		gridbag.setConstraints(scrollPane, c);
+
 		panel.add(scrollPane);
 		
 		this.add(titlePanel, BorderLayout.NORTH);

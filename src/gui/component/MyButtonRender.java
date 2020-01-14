@@ -29,7 +29,7 @@ public class MyButtonRender implements TableCellRenderer
         this.button = new JButton("选择");
  
         // 设置按钮的大小及位置。
-        this.button.setBounds(0, 0, 100, 15);
+        this.button.setBounds(0, 0, 130, 36);
  
         // 在渲染器里边添加按钮的事件是不会触发的
         // this.button.addActionListener(new ActionListener()
