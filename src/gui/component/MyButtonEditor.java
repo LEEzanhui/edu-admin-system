@@ -64,7 +64,6 @@ public class MyButtonEditor extends DefaultCellEditor {
 				Vector<String> out = new Vector<String>();
 				out.add(getname);
 				message.setVec(out);
-				message.setId(user.id);
 				Client.send(message);
             }
         });

@@ -21,7 +21,8 @@ public class NotifyHandler extends Thread {
 	private InputStream in = null;
 	private CourseDB courseDB;
 	private UserDB userDB;
-
+	
+	private String userId;
 
 	public NotifyHandler(Socket socket, UserDB userDB, CourseDB courseDB) {
 		this.socket = socket;
@@ -33,25 +34,25 @@ public class NotifyHandler extends Thread {
 		try {
 			in = socket.getInputStream();
 			System.out.println(socket);
-			ObjectInputStream ois = null;	
-			
+			ObjectInputStream ois = null;
+
 			while(true) {
 				Message<?> msg = null;
 				Message<?> newMsg = null;
-//				try {
+				try {
 					ois = new ObjectInputStream(in);
 					msg = (Message<?>) ois.readObject();
-					newMsg = decode(msg);						
-//				} catch (Exception e) {
-//					System.out.println("Connect reset");
-//					return;
-//				}
+					newMsg = decode(msg);
+				} catch (Exception e) {
+					System.out.println("Connect reset");
+					return;
+				}
 				OutputStream out = socket.getOutputStream();
 				ObjectOutputStream oos = new ObjectOutputStream(out);
 				oos.writeObject(newMsg);
 			}
 
-		} catch (IOException | ClassNotFoundException e) {
+		} catch (IOException e) {
 			e.printStackTrace();
 		}
 
@@ -99,7 +100,7 @@ public class NotifyHandler extends Thread {
 			newMsg = chooseCourse((Message<String>) msg);
 			break;
 		case "showcourse":
-			newMsg = searchCourseById((Message<String>) msg); 
+			newMsg = showCourses((Message<String>) msg);
 			break;
 		default:
 			other();
@@ -114,6 +115,7 @@ public class NotifyHandler extends Thread {
 		if (userDB.pwdMatched(msg.getId(), msg.getPassword())) {
 			User user = userDB.searchById(msg.getId()).firstElement();
 			newMsg.getVec().add(user);
+			userId = user.id(); 
 		} else newMsg.getVec().clear();
 		return newMsg;
 	}
@@ -129,7 +131,8 @@ public class NotifyHandler extends Thread {
 		String password = msg.getVec().get(1);
 		String other = "";
 		User newUser = new User(newId, password, username, other);
-		
+		userId = newUser.id();
+
 		newUsers.put(newId, newUser);
 		Message<User> newMsg = new Message<User>();
 		if (userDB.modify(newUsers))
@@ -216,10 +219,6 @@ public class NotifyHandler extends Thread {
 		newMsg.setVec(out);
 		return newMsg;
 	}
-	private Message<String> chooseCourse(Message<String> msg) {
-		System.out.println(msg.getVec());
-		return msg;
-	}
 	private Message<User> searchUserByName(Message<String> msg) {
 		Message<User> newMsg = new Message<User>();
 		newMsg.setId(msg.getId());
@@ -234,6 +233,24 @@ public class NotifyHandler extends Thread {
 
 		Vector<User> user = userDB.searchById(msg.getVec().get(0));
 		newMsg.setVec(user);
+		return newMsg;
+	}
+	private Message<User> chooseCourse(Message<String> msg) {
+		Message<User> newMsg = new Message<User>();
+		System.out.println(msg.getVec());
+		User newUser = userDB.searchById(userId).firstElement();
+		for (String courseId : msg.getVec())
+		  if (!newUser.courses().contains(courseId))
+			newUser.courses().add(courseId);
+		newMsg.getVec().add(newUser);
+		return newMsg;
+	}
+	private Message<Course> showCourses(Message<String> msg) {
+		Vector<Course> vec = new Vector<Course>();
+		for (String courseId : msg.getVec())
+			vec.add(courseDB.searchByCourseId(courseId).firstElement());
+		Message<Course> newMsg = new Message<Course>();
+		newMsg.setVec(vec);
 		return newMsg;
 	}
 

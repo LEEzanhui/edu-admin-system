@@ -166,6 +166,7 @@ public class InfoPanel extends JPanel{
 		courseBtn.addActionListener(e -> {
 			Message<String> message = new Message<String>(
 					"showcourse", user.courses());
+			System.out.println(user.courses());
 			Client.send(message);
 		});
 	}
