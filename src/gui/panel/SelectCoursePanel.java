@@ -7,6 +7,7 @@ import java.util.Vector;
 import javax.swing.*;
 import javax.swing.table.*;
 
+import data.User;
 import logic.client.*;
 
 import gui.GUI;
@@ -16,6 +17,8 @@ import gui.component.MyButtonRender;
 import logic.server.Message;
 
 public class SelectCoursePanel extends JPanel {
+	private User user;
+	
 	private JLabel title;
 	private JTextField filterText;
 	private JButton search;
@@ -44,7 +47,7 @@ public class SelectCoursePanel extends JPanel {
 	
 	public void initial() {
 		JPanel titlePanel = new JPanel();
-		title = new JLabel("选课");
+		title = new JLabel("选课界面");
 		titlePanel.setLayout(new FlowLayout(FlowLayout.LEFT));
 		title.setForeground(UIConst.TOOL_BAR_BACK_COLOR);
 		title.setFont(UIConst.TITLE_FONT);

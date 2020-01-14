@@ -30,12 +30,13 @@ import gui.component.MyButtonRender;
 import logic.Configuration;
 import logic.server.Message;
 
-public class Client implements java.io.Serializable{
+public class Client implements java.io.Serializable {
 	private static Socket socket = null;
 	private InputStreamReader input = null;
 	private InputStream in = null;
 	private OutputStream out = null;
 	private int clientId;
+	private User user;
 
 	private GUI window = null;
 
@@ -108,9 +109,10 @@ public class Client implements java.io.Serializable{
 		case "regi": case "login": 
 			Vector<User> vec = (Vector<User>) msg.getVec();
 			if(vec.size() > 0) {
-				window.infoPanel.setInfo(vec.firstElement());
-				window.toolBarPanel.buttonStatus.setEnabled(true);		//用于启用其它功能
-				window.toolBarPanel.buttonTimetable.setEnabled(true);//用于启用其它功能
+				user = vec.firstElement();
+				window.infoPanel.setInfo(user);
+				window.toolBarPanel.buttonStatus.setEnabled(true);
+				window.toolBarPanel.buttonTimetable.setEnabled(true);
 				window.toolBarPanel.buttonSetting.setEnabled(true);
 				window.mainPanel.removeAll();
 				window.mainPanel.add(window.infoPanel, BorderLayout.CENTER);
@@ -143,7 +145,6 @@ public class Client implements java.io.Serializable{
 			break;
 		case "seauserid":case "seausername":
 			Vector<User> vec11 = (Vector<User>)msg.getVec();
-//			System.out.println(vec11.size());
 			for(int i=0; i<18; i++) {
 				for(int j=0; j<3; j++) {
 					window.ssPanel.tableModel.setValueAt("", i, j);

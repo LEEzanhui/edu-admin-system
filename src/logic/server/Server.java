@@ -20,22 +20,22 @@ import logic.Configuration;
 
 public class Server {
 	private static ServerSocket server;
+	static Map<Integer, Socket> sessionMap = new HashMap<Integer, Socket>();
+	
 	private CourseDB courseDataBase;
 	private UserDB userDataBase;
 	
 	public JFrame serverFrame;
 	
-	static Map<Integer, Socket> sessionMap = new HashMap<Integer, Socket>();
-	
 	public Server() {
-		courseDataBase = new CourseDB();		//maybe be restructure
+		courseDataBase = new CourseDB();
 		userDataBase = new UserDB();
 	}
 	
 	public void socketStart() {
 		serverFrame = new JFrame();
 		serverFrame.setBounds(UIConst.MAIN_WINDOW_X, UIConst.MAIN_WINDOW_Y,
-				UIConst.MAIN_WINDOW_WIDTH, UIConst.MAIN_WINDOW_HEIGHT);
+				400, 300);
 		serverFrame.setResizable(false);
         serverFrame.setBackground(UIConst.MAIN_BACK_COLOR);
 		serverFrame.setVisible(true);
@@ -47,18 +47,6 @@ public class Server {
 				System.exit(0);
 			}
 		});
-		
-//		serverFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-//		JPanel serverPanel = new JPanel(true);
-//		serverPanel.setLayout(new BorderLayout());
-//		
-//		JButton closeButton = new JButton("close server");
-//		serverPanel.add(closeButton, BorderLayout.CENTER);
-//		serverFrame.add(serverPanel);
-//		closeButton.addActionListener(e -> {
-//			courseDataBase.writeBack();
-//			userDataBase.writeBack();
-//		});
 		
 		try {
 			server = new ServerSocket(Configuration.port);

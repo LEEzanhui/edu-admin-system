@@ -5,6 +5,7 @@ import java.net.Socket;
 
 import javax.swing.*;
 
+import data.User;
 import gui.panel.*;
 
 public class GUI{
@@ -17,6 +18,7 @@ public class GUI{
 	public ToolBarPanel toolBarPanel;
 	public InfoPanel infoPanel;
 	public searchStuPanel ssPanel;
+	
 
 //	private Socket socket = null;
 

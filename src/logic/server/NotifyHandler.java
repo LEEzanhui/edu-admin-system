@@ -96,8 +96,7 @@ public class NotifyHandler extends Thread {
 			newMsg = deleteUser((Message<String>) msg);
 			break;
 		case "choosecourse":
-//			newMsg = choose((Message<String>) msg);
-			newMsg = (Message<String>) msg;
+			newMsg = chooseCourse((Message<String>) msg);
 			break;
 		case "showcourse":
 			newMsg = searchCourseById((Message<String>) msg); 
@@ -216,6 +215,10 @@ public class NotifyHandler extends Thread {
 		}
 		newMsg.setVec(out);
 		return newMsg;
+	}
+	private Message<String> chooseCourse(Message<String> msg) {
+		System.out.println(msg.getVec());
+		return msg;
 	}
 	private Message<User> searchUserByName(Message<String> msg) {
 		Message<User> newMsg = new Message<User>();
