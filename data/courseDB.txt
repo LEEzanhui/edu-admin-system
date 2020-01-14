@@ -1,3 +1,9 @@
+110
+JAVA
+TA
+kai
+end-student
+6
 133
 math
 kai
@@ -28,3 +34,15 @@ kai
 nonoli
 end-student
 good
+111
+computer
+神
+kai
+end-student
+难
+109
+web
+wang
+nonoli
+end-student
+太南了

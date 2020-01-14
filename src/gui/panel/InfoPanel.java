@@ -114,7 +114,7 @@ public class InfoPanel extends JPanel{
 		saveBtn.setEnabled(false);
 		contentPanel.add(saveBtn);
 		
-		courseBtn = new JButton("Selected Course");
+		courseBtn = new JButton("显示已选择课程");
 		contentPanel.add(courseBtn);
 		
 		table = new JTable();
